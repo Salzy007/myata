@@ -204,7 +204,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
 .field-error{font-size:13px;line-height:1.4;color:var(--err)}
 .field-error:empty{display:none}
 .field-foot{display:flex;justify-content:space-between;gap:12px}
-.counter{margin-left:auto;font-size:13px;color:var(--soft);font-variant-numeric:tabular-nums}
+.counter{margin-left:auto;flex:none;white-space:nowrap;font-size:13px;color:var(--soft);font-variant-numeric:tabular-nums}
 
 .b-chips{display:flex;flex-wrap:wrap;gap:8px}
 .b-chip{position:relative;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:4px 18px 4px 4px;white-space:nowrap;border:1px solid var(--chip-line);border-radius:999px;background:var(--surface);font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;transition:border-color .2s,background-color .2s,transform .12s,box-shadow .2s}
@@ -2122,11 +2122,26 @@ body{font-size:var(--fs-body);line-height:1.65}
   window.addEventListener('hashchange', tocFromHash);
   tocFromHash();
 
+  /* always start from the top on open and on F5 (the browser would otherwise restore the old position) */
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (err) { /* old browser */ }
+
   /* routing: main page vs documents */
   var docIds = { privacy: 1, cookie: 1, terms: 1, docs: 1 };
   var mainView = document.getElementById('view-main'), docsView = document.getElementById('view-docs');
-  function route() {
+  function cleanUrl() {
+    // section links (#catalog, #contacts…) only scroll; they are not kept in the address,
+    // so a copied link and F5 always open the page from the top
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (err) { /* sandboxed frame */ }
+  }
+  function route(e, initial) {
     var h = location.hash.slice(1);
+    if (initial && !docIds[h]) {
+      if (h) cleanUrl();
+      mainView.hidden = false; docsView.hidden = true;
+      window.scrollTo(0, 0);
+      onScroll();
+      return;
+    }
     var showDocs = !!docIds[h];
     var wasDocs = !docsView.hidden;
     mainView.hidden = showDocs;
@@ -2139,6 +2154,7 @@ body{font-size:var(--fs-body);line-height:1.65}
     } else if (showDocs || wasDocs || h === 'top') {
       window.scrollTo({ top: 0, behavior: how });
     }
+    if (!showDocs && h) cleanUrl();
     onScroll();
   }
   window.addEventListener('hashchange', route);
@@ -2147,7 +2163,8 @@ body{font-size:var(--fs-body);line-height:1.65}
   syncFavChip();
   updateCartUi();
   observe(document.querySelectorAll('#view-main .rv:not(.card), footer .rv'));
-  route();
+  route(null, true);
+  window.addEventListener('pageshow', function (e) { if (e.persisted && !docIds[location.hash.slice(1)]) window.scrollTo(0, 0); });
 })();
 </script>
 
