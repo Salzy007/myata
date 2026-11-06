@@ -12,7 +12,7 @@
 <style>
 /* Layout: one long scroll — arched hero photo, promise cards, white catalog band, FAQ, sage call block, legal footer. Single light look by choice. */
 :root{
-  --bg:#FBF7F4; --surface:#FFFFFF; --ink:#2E2A2B; --muted:#5A5254; --soft:#6B6164;
+  --bg:#FBF7F4; --surface:#FFFFFF; --ink:#2A2527; --muted:#4D4547; --soft:#645B5E;
   --line:#EADFDC; --chip-line:#E2D6D3; --blush:#F3DDE0; --blush-2:#F1E6E3;
   --accent:#9E4458; --accent-ink:#7A3243; --err:#A3263C; --star:#C24E68; --sage:#536E5B; --sage-ink:#4A5A4E; --sage-bg:#EEF2EC; --night:#2F2729; --night-ink:#F3ECEA; --night-muted:#BFAFB1; --night-line:rgba(255,255,255,.12);
   --display:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -67,7 +67,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
 .menu-btn{display:none}
 .skip{position:absolute;left:16px;top:-80px;z-index:100;padding:12px 18px;border-radius:14px;background:var(--ink);color:#fff;font-weight:600;text-decoration:none;transition:top .2s}
 .skip:focus{top:12px;color:#fff}
-@media (max-width:640px){
+@media (max-width:1020px){
   .site-header{padding-block:14px 8px;gap:10px}
   .logo{font-size:26px;margin-right:auto}
   .header-phone{width:44px;height:44px;min-height:44px;padding:0;border-radius:999px}
@@ -208,6 +208,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
 
 .b-chips{display:flex;flex-wrap:wrap;gap:8px}
 .b-chip{position:relative;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:4px 18px 4px 4px;white-space:nowrap;border:1px solid var(--chip-line);border-radius:999px;background:var(--surface);font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;transition:border-color .2s,background-color .2s,transform .12s,box-shadow .2s}
+.field .b-chip{padding:4px 18px 4px 4px;font-size:15px;font-weight:600}
 .b-chip:hover{border-color:var(--accent)}
 .b-chip:active{transform:scale(.96)}
 .b-chip input{position:absolute;opacity:0;width:1px;height:1px}
@@ -337,6 +338,86 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
 .fab::before{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid var(--accent);opacity:0}
 .fab.on::before{animation:ring 2.4s ease-out 1s infinite}
 @keyframes ring{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(1.6)}}
+
+/* cart */
+.cart-btn,.hdr-fav{position:relative;width:44px;height:44px;flex:none;border:1px solid var(--chip-line);border-radius:999px;background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .15s cubic-bezier(.3,.7,.4,1.4),border-color .2s}
+.cart-btn:hover,.hdr-fav:hover{border-color:var(--accent);color:var(--accent)}
+.cart-btn:active,.hdr-fav:active{transform:scale(.92)}
+.cart-count,.fav-badge{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font-size:12px;font-weight:700;line-height:20px;text-align:center;font-variant-numeric:tabular-nums;box-shadow:0 0 0 2px var(--bg)}
+.bump{animation:bump .45s cubic-bezier(.3,.7,.4,1.6)}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+.fab-cart{position:fixed;right:calc(20px + env(safe-area-inset-right, 0px));bottom:calc(92px + env(safe-area-inset-bottom, 0px));z-index:40;width:60px;height:60px;border:0;border-radius:999px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 14px 30px -10px rgba(46,42,43,.55);opacity:0;transform:translateY(24px) scale(.8);pointer-events:none;transition:opacity .35s ease,transform .35s cubic-bezier(.3,.7,.4,1.4)}
+.fab-cart.on{opacity:1;transform:none;pointer-events:auto}
+.fab-cart:active{transform:scale(.92)}
+.fab-cart .cart-count{box-shadow:0 0 0 2px var(--ink)}
+.fab-fav{position:fixed;right:calc(20px + env(safe-area-inset-right, 0px));bottom:calc(92px + env(safe-area-inset-bottom, 0px));z-index:40;width:60px;height:60px;border:1px solid var(--chip-line);border-radius:999px;background:var(--surface);color:var(--accent);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 14px 30px -10px rgba(46,42,43,.35);opacity:0;transform:translateY(24px) scale(.8);pointer-events:none;transition:opacity .35s ease,transform .35s cubic-bezier(.3,.7,.4,1.4),bottom .35s cubic-bezier(.3,.7,.4,1.2)}
+.fab-fav.lift{bottom:calc(164px + env(safe-area-inset-bottom, 0px))}
+.fab-fav.on{opacity:1;transform:none;pointer-events:auto}
+.fab-fav:active{transform:scale(.92)}
+.fab-fav svg{fill:currentColor}
+.fab-fav .fav-badge{box-shadow:0 0 0 2px var(--surface)}
+.overlay.cart-overlay{padding:0;justify-content:flex-end;align-items:stretch;overflow:hidden}
+.cart{width:min(480px,100%);height:100%;background:var(--bg);display:flex;flex-direction:column;box-shadow:-30px 0 60px -30px rgba(0,0,0,.45);animation:slidein .38s cubic-bezier(.2,.7,.2,1);padding-top:env(safe-area-inset-top, 0px)}
+@keyframes slidein{from{transform:translateX(100%)}to{transform:none}}
+.cart-head{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 24px 6px}
+.cart-head h3{margin:0;font-family:var(--display);font-weight:600;font-size:34px;line-height:1.1;outline:none}
+.cart-head .close{position:static}
+.cart-steps{list-style:none;margin:0;padding:8px 24px 14px;display:flex;gap:6px;counter-reset:cs;border-bottom:1px solid var(--line)}
+.cart-steps li{flex:1;display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:600;color:var(--soft)}
+.cart-steps li::before{content:"";height:4px;border-radius:999px;background:var(--blush-2);transition:background-color .3s}
+.cart-steps li.on{color:var(--accent)}
+.cart-steps li.on::before{background:var(--accent)}
+.cart-pane{flex:1;min-height:0;display:flex;flex-direction:column}
+.cart-body{flex:1;min-height:0;overflow-y:auto;padding:18px 24px;display:flex;flex-direction:column;gap:18px;overscroll-behavior:contain}
+.cart-foot{display:flex;flex-direction:column;gap:10px;padding:16px 24px calc(18px + env(safe-area-inset-bottom, 0px));border-top:1px solid var(--line);background:var(--surface)}
+.sum-row{display:flex;justify-content:space-between;gap:12px;font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums}
+.sum-row b{color:var(--ink);font-weight:600}
+.sum-row.total{font-size:17px;color:var(--ink);font-weight:600;padding-top:4px}
+.sum-row.total b{font-family:var(--display);font-size:26px;line-height:1;color:var(--accent)}
+.cart-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.ci{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:14px;align-items:center;padding:10px;border-radius:20px;background:var(--surface);animation:fade .25s ease}
+.ci img{display:block;width:72px;height:72px;border-radius:14px;object-fit:cover}
+.ci-body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.ci-body b{font-family:var(--display);font-weight:600;font-size:21px;line-height:1.15}
+.ci-body .price{font-size:14px}
+.ci-remove{width:44px;height:44px;border:0;border-radius:999px;background:transparent;color:var(--soft);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background-color .2s,color .2s}
+.ci-remove:hover{background:var(--blush-2);color:var(--err)}
+.qty{display:inline-flex;align-items:center;align-self:flex-start;border:1px solid var(--chip-line);border-radius:999px;background:var(--bg)}
+.qty button{width:40px;height:40px;border:0;border-radius:999px;background:transparent;color:var(--ink);font:inherit;font-size:20px;line-height:1;cursor:pointer;transition:background-color .15s,transform .1s}
+.qty button:hover{background:var(--blush-2)}
+.qty button:active{transform:scale(.88)}
+.qty span{min-width:26px;text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+.cart-empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:48px 12px;color:var(--muted);font-size:15px}
+.cart-empty b{font-family:var(--display);font-weight:600;font-size:26px;color:var(--ink)}
+.ce-ico{width:72px;height:72px;border-radius:999px;background:var(--blush-2);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.field label small{font-weight:400;color:var(--soft)}
+.field select,.field input[type="tel"],.field input[type="date"]{width:100%;min-height:52px;padding:12px 14px;border:1px solid var(--chip-line);border-radius:16px;background:var(--surface);color:var(--ink);font:inherit;font-size:16px;transition:border-color .2s,box-shadow .2s}
+.cart .field input[type="text"],.cart .field textarea{background:var(--surface)}
+.field select:focus,.field input[type="tel"]:focus,.field input[type="date"]:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(158,68,88,.14)}
+.cart .field textarea{min-height:88px}
+.field-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pay-row{display:flex;flex-wrap:wrap;gap:8px}
+.pay{position:relative;cursor:pointer}
+.pay input{position:absolute;opacity:0;width:1px;height:1px}
+.pay span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--chip-line);border-radius:999px;background:var(--surface);font-size:14px;font-weight:500;transition:border-color .2s,background-color .2s,color .2s}
+.pay input:checked + span{border-color:var(--accent);background:var(--accent);color:#fff}
+.pay input:focus-visible + span{outline:3px solid var(--accent);outline-offset:2px}
+.btn-wa{background:#1F7A4D;color:#fff}.btn-wa:hover{color:#fff}
+.foot-alt{display:flex;flex-wrap:wrap;gap:8px}
+.foot-alt .btn{flex:1 1 auto}
+.done-body{align-items:center;text-align:center}
+.done-body h4{margin:0;font-family:var(--display);font-weight:600;font-size:30px;line-height:1.15;outline:none}
+.done-body p{margin:0;max-width:26em;font-size:15px;line-height:1.6;color:var(--muted)}
+.order-text{align-self:stretch;margin:0;padding:14px 16px;border-radius:16px;background:var(--surface);border:1px dashed var(--chip-line);font:inherit;font-size:14px;line-height:1.55;color:var(--ink);text-align:left;white-space:pre-wrap;-webkit-user-select:text;user-select:text}
+.card-qty{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px;padding:2px;border:1px solid var(--accent);border-radius:999px;background:#F9EDEF}
+.card-qty button{width:40px;height:40px;border:0;border-radius:999px;background:var(--surface);color:var(--accent);font:inherit;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 2px 6px -3px rgba(46,42,43,.35);transition:transform .1s}
+.card-qty button:active{transform:scale(.88)}
+.card-qty span{font-size:14px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.card .card-qty{margin-top:auto}
+@media (max-width:480px){.site-header{gap:10px 8px}.header-phone{display:none!important}}
+@media (max-width:350px){.logo{font-size:22px}}
+@media (max-width:420px){.menu-btn{width:44px;padding:0;justify-content:center}.menu-btn span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
+@media (max-width:640px){.cart-head{padding:16px 16px 4px}.cart-steps,.cart-body,.cart-foot{padding-left:16px;padding-right:16px}.field-pair{grid-template-columns:minmax(0,1fr)}}
 
 /* order modal */
 .overlay{position:fixed;inset:0;z-index:50;background:rgba(46,42,43,.55);display:flex;align-items:center;justify-content:center;padding:max(16px, env(safe-area-inset-top, 0px)) var(--gutter-r) max(16px, env(safe-area-inset-bottom, 0px)) var(--gutter-l);overflow-y:auto;animation:fade .2s ease}
@@ -501,7 +582,50 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
   .doc-ico{width:48px;height:48px;border-radius:16px}
 }
 
+/* favourites drawer */
+.hdr-fav svg{transition:fill .2s}
+.hdr-fav.has svg{fill:var(--accent);stroke:var(--accent)}
+.fi-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.fi-actions .btn{min-height:40px}
+.ci-remove.unfav{color:var(--accent)}
+.ci-remove.unfav svg{fill:currentColor}
+.ci-remove.unfav:hover{color:var(--err)}
+.fav-photo{padding:0;border:0;background:none;cursor:pointer;border-radius:14px;overflow:hidden}
+.fav-photo img{transition:scale .4s ease}
+.fav-photo:hover img{scale:1.08}
+/* ===== typography scale ===== */
+:root{--fs-sm:14px;--fs-body:16.5px;--fs-lead:18px;--fs-h4:20px;--fs-h3:clamp(24px,2.3vw,28px);--fs-h2:clamp(36px,4.6vw,56px)}
+body{font-size:var(--fs-body);line-height:1.65}
+.h2{font-size:var(--fs-h2);font-weight:600;letter-spacing:-.01em;line-height:1.08}
+.eyebrow{font-size:var(--fs-sm);letter-spacing:.14em;font-weight:700}
+.lead,.about-text p,.call-text p,.review-intro > p,.cat-head p,.reviews-head p{font-size:var(--fs-lead);line-height:1.7;color:var(--muted)}
+.card h3,.q-res-head b,.ci-body b,.qb-text b{font-size:var(--fs-h3);font-weight:600;line-height:1.15}
+.promise h3,.tile h3,.box h4,.doc-list h3{font-size:var(--fs-h4);font-weight:700;line-height:1.3}
+.card p,.promise p,.faq-a,.dots li,.reason span,.doc-card p,.doc-card .box p,.doc-card .tile p{font-size:var(--fs-body);line-height:1.65;color:var(--muted)}
+.s-text small,.r-steps span,.q-why{font-size:var(--fs-sm);line-height:1.55}
+.faq-q{font-size:19px;font-weight:600}
+.price{font-size:18px;font-weight:700;color:var(--accent-ink)}
+.r-steps b,.s-text b{font-size:17px}
+.field label,.check,.foot-col,.open-status,.review-note{font-size:15px}
+.foot-tag,.qb-text{font-size:16px}
+.form-head span,.field label,.field legend,.review figcaption,.copy-note,.ci-body .price,.card-qty span,.toc-help,.doc-card-head p{font-size:15px}
+.field label small,.field legend small{font-size:14px;font-weight:500;color:var(--soft)}
+.field-error,.counter,.steps-title,.quiz-step{font-size:14px}
+.cart-steps li,.foot-col h4{font-size:13px}
+/* ===== photo hover + sheen ===== */
+.about-media,.card-photo{position:relative}
+.arch img,.about-media img,.review-photo img,.card-photo img{transition:scale .8s cubic-bezier(.2,.7,.2,1),transform .5s ease}
+.card:hover .card-photo img{transform:none;scale:1.06}
+.about-media:hover img,.review-photo:hover img{scale:1.07}
+.hero-media:hover .arch img{scale:1.05}
+.arch::after,.about-media::after,.review-photo .arch-sm::after,.card-photo::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.42) 50%,transparent 65%);transform:translateX(-120%);transition:transform 0s}
+.hero-media:hover .arch::after,.about-media:hover::after,.review-photo:hover .arch-sm::after,.card:hover .card-photo::after{transform:translateX(120%);transition:transform 1.1s ease}
+/* ===== photo entrance ===== */
+.js .rv img{scale:1.14}
+.js .rv.in img{scale:1;transition:scale 1.4s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
 @media (prefers-reduced-motion: reduce){
+  .js .rv img{scale:1}.arch::after,.about-media::after,.review-photo .arch-sm::after,.card-photo::after{display:none}
+  .arch img,.about-media img,.review-photo img,.card-photo img{transition:none}
   .js .rv{opacity:1;transform:none}
   *,*::before,*::after{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}.petal{display:none}
@@ -525,6 +649,8 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
         <a class="link nav-tab" href="#contacts">Контакты</a>
       </nav>
       <a class="btn btn-outline header-phone" href="tel:+375290000000"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span class="hp-text">Позвонить</span></a>
+      <button class="hdr-fav" type="button" data-fav-open aria-label="Избранное, пусто"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></svg><span class="fav-badge" hidden>0</span></button>
+      <button class="cart-btn" type="button" data-cart-open aria-label="Корзина, пусто"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg><span class="cart-count" hidden>0</span></button>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Меню</span></button>
     </header>
 
@@ -829,8 +955,9 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
             <li><div>
               <h3>Какие данные мы получаем</h3>
               <div class="duo">
-                <div class="box"><h4>При заказе по телефону</h4>
-                  <ul class="dots"><li>имя заказчика и получателя</li><li>телефон заказчика и получателя</li><li>адрес, дата и время доставки</li><li>текст открытки, если вы его продиктуете</li></ul>
+                <div class="box"><h4>При заказе по телефону или через корзину</h4>
+                  <ul class="dots"><li>имя заказчика и получателя</li><li>телефон заказчика и получателя</li><li>адрес, дата и время доставки</li><li>текст открытки и способ оплаты</li></ul>
+                  <p>Заказ из корзины вы сами отправляете нам в WhatsApp; переписку там обрабатывает WhatsApp по своим правилам.</p>
                 </div>
                 <div class="box"><h4>Через форму отзыва</h4>
                   <ul class="dots"><li>ваше имя</li><li>оценка и название букета</li><li>текст отзыва</li></ul>
@@ -863,6 +990,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
             <div><h2>Политика cookie</h2><p>Небольшие файлы, которые сайты сохраняют в браузере</p></div>
           </div>
           <div class="status"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Сайт не использует cookie, веб-аналитику и рекламные счётчики</span></div>
+          <p>Избранное и корзина хранятся только в вашем браузере (в его локальном хранилище) и никуда не передаются. Очистить их можно, удалив данные сайта в настройках браузера.</p>
           <p>Если в будущем мы подключим аналитику, например Яндекс Метрику, на сайте появится уведомление, где можно будет принять или отклонить необязательные cookie, а этот раздел обновится.</p>
         </article>
 
@@ -872,7 +1000,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
             <div><h2>Условия продажи и доставки</h2><p>Как мы принимаем заказы, доставляем и принимаем оплату</p></div>
           </div>
           <div class="tiles">
-            <div class="tile"><span class="t-ico" style="background:#F6E3E5;color:#9E4458"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><h3>Как заказать</h3><p>По телефону +375 (29) 000-00-00 ежедневно с 9:00 до 21:00. Флорист подтвердит состав, стоимость, адрес и время доставки.</p></div>
+            <div class="tile"><span class="t-ico" style="background:#F6E3E5;color:#9E4458"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><h3>Как заказать</h3><p>Добавьте букеты в корзину и отправьте заказ в WhatsApp или позвоните +375 (29) 000-00-00 ежедневно с 9:00 до 21:00. Флорист подтвердит состав, стоимость, адрес и время доставки.</p></div>
             <div class="tile"><span class="t-ico" style="background:#ECE6F3;color:#6A4F8E"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg></span><h3>Цены</h3><p>В белорусских рублях, [с НДС / НДС не облагается]. Состав может немного отличаться от фото — замены согласуем с вами заранее.</p></div>
             <div class="tile"><span class="t-ico" style="background:#E4ECF3;color:#3D6A8E"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3.5V16h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span><h3>Доставка</h3><p>[В пределах МКАД — стоимость …; за МКАД — по договорённости.] Ежедневно с 10:00 до 21:00.</p></div>
             <div class="tile"><span class="t-ico" style="background:#F8E7DC;color:#9A5A2E"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></svg></span><h3>Оплата</h3><p>[Наличными или картой курьеру, через ЕРИП.] При оплате выдаём кассовый чек.</p></div>
@@ -943,11 +1071,148 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
     </div>
   </div>
   <span class="foot-mark" aria-hidden="true">Мята и пион</span>
-</footer></footer>
+</footer>
 
 <a class="fab" id="fab" href="tel:+375290000000" aria-label="Позвонить в магазин">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
 </a>
+
+<button class="fab-fav" id="fab-fav" type="button" data-fav-open aria-label="Открыть избранное"><svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></svg><span class="fav-badge" hidden>0</span></button>
+<button class="fab-cart" id="fab-cart" type="button" data-cart-open aria-label="Открыть корзину"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg><span class="cart-count" hidden>0</span></button>
+
+<div class="overlay cart-overlay" id="cart-overlay" hidden style="z-index:57">
+  <div class="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="cart-head">
+      <h3 id="cart-title" tabindex="-1">Корзина</h3>
+      <button class="close" type="button" data-cart-close aria-label="Закрыть корзину"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <ol class="cart-steps" aria-label="Шаги заказа">
+      <li data-step="1" class="on">Букеты</li><li data-step="2">Доставка</li><li data-step="3">Отправка</li>
+    </ol>
+
+    <div class="cart-pane" id="cart-items">
+      <div class="cart-body">
+        <ul class="cart-list" id="cart-list"></ul>
+        <div class="cart-empty" id="cart-empty" hidden>
+          <span class="ce-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg></span>
+          <b>В корзине пока пусто</b>
+          <span>Добавьте букет из каталога — он появится здесь.</span>
+          <button class="btn btn-soft btn-sm" type="button" data-cart-to-catalog>Перейти к каталогу</button>
+        </div>
+      </div>
+      <div class="cart-foot" id="cart-foot">
+        <div class="sum-row"><span id="sum-label">Букеты</span><b id="sum-goods">0 BYN</b></div>
+        <div class="sum-row"><span>Доставка</span><span>рассчитает флорист</span></div>
+        <div class="sum-row total"><span>Итого</span><b id="sum-total">0 BYN</b></div>
+        <button class="btn btn-primary btn-submit" type="button" id="cart-next">Оформить заказ</button>
+      </div>
+    </div>
+
+    <form class="cart-pane" id="cart-form" hidden novalidate>
+      <div class="cart-body">
+        <div class="field">
+          <label for="co-name">Ваше имя</label>
+          <input id="co-name" name="name" type="text" autocomplete="name" maxlength="60" placeholder="Например, Анна">
+          <span class="field-error" id="co-name-err"></span>
+        </div>
+        <div class="field">
+          <label for="co-phone">Ваш телефон</label>
+          <input id="co-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+375 (29) 123-45-67">
+          <span class="field-error" id="co-phone-err"></span>
+        </div>
+        <div class="field">
+          <label for="co-recipient">Получатель <small>— если это не вы: имя и телефон</small></label>
+          <input id="co-recipient" name="recipient" type="text" maxlength="80" placeholder="Например, Мария, +375 (33) 765-43-21">
+        </div>
+        <div class="field">
+          <label for="co-address">Адрес доставки</label>
+          <input id="co-address" name="address" type="text" autocomplete="street-address" maxlength="160" placeholder="Минск, улица, дом, квартира">
+          <span class="field-error" id="co-address-err"></span>
+        </div>
+        <div class="field-pair">
+          <div class="field">
+            <label for="co-date">Дата</label>
+            <input id="co-date" name="date" type="date">
+            <span class="field-error" id="co-date-err"></span>
+          </div>
+          <div class="field">
+            <label for="co-time">Время</label>
+            <select id="co-time" name="time">
+              <option>Как можно скорее</option>
+              <option>10:00–12:00</option><option>12:00–14:00</option><option>14:00–16:00</option>
+              <option>16:00–18:00</option><option>18:00–21:00</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="co-card">Текст открытки <small>— необязательно</small></label>
+          <textarea id="co-card" name="card" rows="3" maxlength="300" placeholder="Подпишем от руки"></textarea>
+        </div>
+        <fieldset class="field">
+          <legend>Оплата</legend>
+          <div class="pay-row">
+            <label class="pay"><input type="radio" name="pay" value="Наличными курьеру" checked><span>Наличными курьеру</span></label>
+            <label class="pay"><input type="radio" name="pay" value="Картой курьеру"><span>Картой курьеру</span></label>
+            <label class="pay"><input type="radio" name="pay" value="Через ЕРИП"><span>Через ЕРИП</span></label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label class="check" for="co-consent">
+            <input id="co-consent" name="consent" type="checkbox" value="да">
+            <span>Согласен(на) на обработку моих данных для выполнения заказа согласно <a href="#privacy">политике обработки персональных данных</a>.</span>
+          </label>
+          <span class="field-error" id="co-consent-err"></span>
+        </div>
+      </div>
+      <div class="cart-foot">
+        <div class="sum-row total"><span>К оплате за букеты</span><b id="sum-total-2">0 BYN</b></div>
+        <button class="btn btn-wa btn-submit" type="submit" data-via="wa"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.4 7.5L3.5 20.5l1.4-4.4A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M9 9.2c0 3 2.6 5.6 5.6 5.6l1.1-1.4-1.9-.9-.8.8c-1-.4-1.9-1.3-2.3-2.3l.8-.8-.9-1.9z"/></svg>Отправить в WhatsApp</button>
+        <div class="foot-alt">
+          <button class="btn btn-soft btn-sm" type="button" id="cart-back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Назад</button>
+          <button class="btn btn-soft btn-sm" type="submit" data-via="call"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Продиктовать по телефону</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="cart-pane" id="cart-done" hidden>
+      <div class="cart-body done-body">
+        <span class="done-ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <h4 id="done-title" tabindex="-1">Заказ готов к отправке</h4>
+        <p id="done-text"></p>
+        <pre class="order-text" id="order-text"></pre>
+        <button class="btn btn-soft btn-sm" type="button" id="copy-order">Скопировать текст заказа</button>
+        <span class="copy-note" id="copy-order-note" aria-live="polite"></span>
+      </div>
+      <div class="cart-foot">
+        <button class="btn btn-primary btn-submit" type="button" id="cart-finish">Готово, очистить корзину</button>
+        <button class="btn btn-soft btn-sm" type="button" id="cart-edit">Вернуться к заказу</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay cart-overlay" id="fav-overlay" hidden style="z-index:57">
+  <div class="cart" role="dialog" aria-modal="true" aria-labelledby="fav-title">
+    <div class="cart-head">
+      <h3 id="fav-title" tabindex="-1">Избранное</h3>
+      <button class="close" type="button" data-fav-close aria-label="Закрыть избранное"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="cart-pane">
+      <div class="cart-body">
+        <ul class="cart-list" id="fav-list"></ul>
+        <div class="cart-empty" id="fav-empty" hidden>
+          <span class="ce-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></svg></span>
+          <b>Здесь пока пусто</b>
+          <span>Нажмите на сердечко у букета в каталоге — он сохранится здесь.</span>
+          <button class="btn btn-soft btn-sm" type="button" data-fav-to-catalog>Перейти к каталогу</button>
+        </div>
+      </div>
+      <div class="cart-foot" id="fav-foot">
+        <button class="btn btn-primary" type="button" data-fav-to-cart>Перейти в корзину</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="overlay" id="overlay" hidden>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-name">
@@ -958,13 +1223,13 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
       <span class="price" id="m-price"></span>
       <p id="m-desc"></p>
       <ol>
-        <li>Позвоните нам: +375 (29) 000-00-00</li>
-        <li>Назовите букет «<span id="m-name2"></span>»</li>
-        <li>Укажите адрес и время — привезём сегодня</li>
+        <li>Добавьте букет в корзину</li>
+        <li>Укажите адрес, дату и время доставки</li>
+        <li>Отправьте заказ в WhatsApp или позвоните — флорист подтвердит</li>
       </ol>
       <div class="row" style="margin-top:8px">
-        <a class="btn btn-primary" href="tel:+375290000000">Позвонить и заказать</a>
-        <button class="btn btn-soft" type="button" data-close>Выбрать другой</button>
+        <button class="btn btn-primary" type="button" id="m-add"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>В корзину</button>
+        <a class="btn btn-soft" href="tel:+375290000000"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Позвонить</a>
       </div>
     </div>
     <button class="close" type="button" data-close aria-label="Закрыть">
@@ -1051,20 +1316,82 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
     var chip = document.querySelector('.chip-fav');
     chip.hidden = favs.length === 0;
     document.getElementById('fav-count').textContent = favs.length ? '(' + favs.length + ')' : '';
+    var hb = document.querySelector('.hdr-fav');
+    document.querySelectorAll('.fav-badge').forEach(function (badge) { badge.hidden = favs.length === 0; badge.textContent = favs.length; });
+    if (typeof onScroll === 'function' && typeof fab !== 'undefined' && fab) onScroll();
+    hb.classList.toggle('has', favs.length > 0);
+    hb.setAttribute('aria-label', favs.length ? 'Избранное, ' + pieces(favs.length) : 'Избранное, пусто');
   }
-  function toggleFav(btn) {
-    var name = btn.getAttribute('data-fav'), k = favs.indexOf(name), on = k === -1;
+  function toggleFav(btn) { toggleFavName(btn.getAttribute('data-fav')); }
+  function toggleFavName(name) {
+    var k = favs.indexOf(name), on = k === -1;
     if (on) favs.push(name); else favs.splice(k, 1);
     try { localStorage.setItem('myata-favs', JSON.stringify(favs)); } catch (err) { /* private mode: keep for this visit */ }
-    btn.setAttribute('aria-pressed', on);
-    btn.setAttribute('aria-label', (on ? 'Убрать из избранного: ' : 'В избранное: ') + name);
+    document.querySelectorAll('.fav[data-fav]').forEach(function (b) {
+      if (b.getAttribute('data-fav') !== name) return;
+      b.setAttribute('aria-pressed', on);
+      b.setAttribute('aria-label', (on ? 'Убрать из избранного: ' : 'В избранное: ') + name);
+    });
     syncFavChip();
+    if (!favOverlay.hidden) renderFavList();
+    document.querySelectorAll('.hdr-fav, .fab-fav').forEach(function (el) { el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); });
     if (on) toast('Добавили «' + name + '» в избранное');
     if (!on && currentFilter() === 'fav') {
       if (!favs.length) document.querySelector('.chip[data-filter="all"]').click();
       else renderGrid('fav', true);
     }
   }
+
+  /* favourites drawer */
+  var favOverlay = document.getElementById('fav-overlay'), favFrom = null;
+  function renderFavList() {
+    var list = document.getElementById('fav-list');
+    var names = favs.filter(function (n) { return byName(n) !== -1; });
+    document.getElementById('fav-empty').hidden = names.length > 0;
+    document.getElementById('fav-foot').hidden = cartCount() === 0;
+    list.innerHTML = names.map(function (n) {
+      var i = byName(n), b = bouquets[i], q = cart[n] || 0;
+      return '<li class="ci"><button class="fav-photo" type="button" data-fav-pick="' + i + '" aria-label="Подробнее: ' + esc(n) + '"><img src="' + IMG[b.img] + '" alt=""></button>' +
+        '<div class="ci-body"><b>' + esc(n) + '</b><span class="price">' + byn(b.price) + '</span>' +
+        '<div class="fi-actions"><button class="btn btn-soft btn-sm" type="button" data-fav-add="' + i + '">' + (q ? 'В корзине: ' + q + ' · ещё' : 'В корзину') + '</button></div></div>' +
+        '<button class="ci-remove unfav" type="button" data-unfav="' + esc(n) + '" aria-label="Убрать из избранного: ' + esc(n) + '">' + heart.replace('<svg ', '<svg fill="currentColor" stroke="currentColor" ') + '</button></li>';
+    }).join('');
+  }
+  function openFav(from) {
+    favFrom = from || null;
+    setMenu(false);
+    renderFavList();
+    favOverlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    onScroll();
+    document.getElementById('fav-title').focus();
+  }
+  function closeFav(noFocus) {
+    favOverlay.hidden = true;
+    if (overlay.hidden && quizOverlay.hidden && cartOverlay.hidden) document.body.style.overflow = '';
+    onScroll();
+    if (!noFocus && favFrom && document.body.contains(favFrom)) favFrom.focus();
+  }
+  document.addEventListener('click', function (e) {
+    var o = e.target.closest('[data-fav-open]');
+    if (o) { e.preventDefault(); openFav(o); }
+  });
+  favOverlay.addEventListener('click', function (e) {
+    if (e.target === favOverlay || e.target.closest('[data-fav-close]')) { closeFav(); return; }
+    var a = e.target.closest('[data-fav-add]');
+    if (a) {
+      var i = +a.getAttribute('data-fav-add');
+      addToCart(i); renderFavList();
+      var again = favOverlay.querySelector('[data-fav-add="' + i + '"]'); if (again) again.focus();
+      return;
+    }
+    var u = e.target.closest('[data-unfav]');
+    if (u) { toggleFavName(u.getAttribute('data-unfav')); document.getElementById('fav-title').focus(); return; }
+    var pk = e.target.closest('[data-fav-pick]');
+    if (pk) { closeFav(true); openModal(+pk.getAttribute('data-fav-pick'), document.querySelector('.hdr-fav')); return; }
+    if (e.target.closest('[data-fav-to-cart]')) { closeFav(true); openCart(document.querySelector('.cart-btn')); return; }
+    if (e.target.closest('[data-fav-to-catalog]')) { closeFav(true); document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' }); }
+  });
 
   /* mobile menu */
   var siteHeader = document.querySelector('#view-main .site-header');
@@ -1095,6 +1422,195 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
   updateOpenStatus();
   setInterval(updateOpenStatus, 30000);
 
+  /* cart: kept in this browser, sent to the shop through WhatsApp or by phone */
+  var cart = {};
+  try { cart = JSON.parse(localStorage.getItem('myata-cart') || '{}') || {}; } catch (err) { cart = {}; }
+  function byName(n) { for (var k = 0; k < bouquets.length; k++) if (bouquets[k].name === n) return k; return -1; }
+  Object.keys(cart).forEach(function (n) { if (byName(n) === -1 || !(cart[n] > 0)) delete cart[n]; });
+  function cartCount() { return Object.keys(cart).reduce(function (s, n) { return s + cart[n]; }, 0); }
+  function cartTotal() { return Object.keys(cart).reduce(function (s, n) { return s + cart[n] * bouquets[byName(n)].price; }, 0); }
+  function pieces(n) { var m10 = n % 10, m100 = n % 100; return n + ' ' + (m10 === 1 && m100 !== 11 ? 'букет' : (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? 'букета' : 'букетов')); }
+  function saveCart() { try { localStorage.setItem('myata-cart', JSON.stringify(cart)); } catch (err) { /* private mode: keep for this visit */ } }
+  function cardControl(i) {
+    var q = cart[bouquets[i].name] || 0;
+    if (!q) return '<button class="btn btn-outline btn-sm" type="button" data-add="' + i + '" data-ctl="' + i + '">В корзину</button>';
+    return '<div class="card-qty" data-ctl="' + i + '"><button type="button" data-dec="' + i + '" aria-label="Убрать один: ' + esc(bouquets[i].name) + '">−</button>' +
+      '<span>' + q + ' в корзине</span><button type="button" data-inc="' + i + '" aria-label="Добавить ещё: ' + esc(bouquets[i].name) + '">+</button></div>';
+  }
+  function refreshCardControl(i, keepFocus) {
+    var old = grid.querySelector('[data-ctl="' + i + '"]');
+    if (!old) return;
+    var focusedKind = keepFocus && old.contains(document.activeElement) ? (document.activeElement.hasAttribute('data-dec') ? 'dec' : 'inc') : null;
+    var tmp = document.createElement('div'); tmp.innerHTML = cardControl(i);
+    var fresh = tmp.firstChild; old.replaceWith(fresh);
+    if (focusedKind) { var b = fresh.querySelector('[data-' + focusedKind + ']') || fresh; b.focus(); }
+  }
+  function updateCartUi() {
+    var n = cartCount();
+    document.querySelectorAll('.cart-count').forEach(function (el) { el.hidden = n === 0; el.textContent = n; });
+    document.querySelector('.cart-btn').setAttribute('aria-label', n ? 'Корзина, ' + pieces(n) : 'Корзина, пусто');
+    onScroll();
+  }
+  function bump() {
+    document.querySelectorAll('.cart-btn, .fab-cart').forEach(function (el) { el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); });
+  }
+  function addToCart(i, from) {
+    var n = bouquets[i].name;
+    cart[n] = (cart[n] || 0) + 1;
+    saveCart(); updateCartUi(); refreshCardControl(i, true); bump();
+    if (from && from.hasAttribute('data-add')) { var c = grid.querySelector('[data-ctl="' + i + '"] [data-inc]'); if (c) c.focus(); }
+    toast('«' + n + '» в корзине');
+    renderCartList();
+  }
+  function changeQty(n, d) {
+    var q = (cart[n] || 0) + d;
+    if (q <= 0) delete cart[n]; else cart[n] = q;
+    saveCart(); updateCartUi(); refreshCardControl(byName(n), true); renderCartList();
+  }
+  var cartOverlay = document.getElementById('cart-overlay'), cartFrom = null;
+  var paneItems = document.getElementById('cart-items'), paneForm = document.getElementById('cart-form'), paneDone = document.getElementById('cart-done');
+  function setStep(s) {
+    paneItems.hidden = s !== 1; paneForm.hidden = s !== 2; paneDone.hidden = s !== 3;
+    document.querySelectorAll('.cart-steps li').forEach(function (li) { li.classList.toggle('on', +li.getAttribute('data-step') <= s); });
+  }
+  function renderCartList() {
+    var names = Object.keys(cart), list = document.getElementById('cart-list');
+    document.getElementById('cart-empty').hidden = names.length > 0;
+    document.getElementById('cart-foot').hidden = names.length === 0;
+    list.innerHTML = names.map(function (n) {
+      var b = bouquets[byName(n)], q = cart[n];
+      return '<li class="ci"><img src="' + IMG[b.img] + '" alt="">' +
+        '<div class="ci-body"><b>' + esc(n) + '</b><span class="price">' + byn(b.price) + (q > 1 ? ' × ' + q + ' = ' + byn(b.price * q) : '') + '</span>' +
+        '<div class="qty"><button type="button" data-cq="-1" data-name="' + esc(n) + '" aria-label="Меньше: ' + esc(n) + '">−</button><span aria-live="polite">' + q + '</span>' +
+        '<button type="button" data-cq="1" data-name="' + esc(n) + '" aria-label="Больше: ' + esc(n) + '">+</button></div></div>' +
+        '<button class="ci-remove" type="button" data-cremove="' + esc(n) + '" aria-label="Убрать из корзины: ' + esc(n) + '">' +
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg></button></li>';
+    }).join('');
+    var n = cartCount(), sum = cartTotal();
+    document.getElementById('sum-label').textContent = 'Букеты, ' + pieces(n);
+    document.getElementById('sum-goods').textContent = byn(sum);
+    document.getElementById('sum-total').textContent = byn(sum);
+    document.getElementById('sum-total-2').textContent = byn(sum);
+  }
+  function openCart(from) {
+    cartFrom = from || null;
+    setMenu(false);
+    renderCartList(); setStep(1);
+    cartOverlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    onScroll();
+    document.getElementById('cart-title').focus();
+  }
+  function closeCart() {
+    cartOverlay.hidden = true;
+    if (overlay.hidden && quizOverlay.hidden) document.body.style.overflow = '';
+    onScroll();
+    if (cartFrom && document.body.contains(cartFrom)) cartFrom.focus();
+  }
+  document.addEventListener('click', function (e) {
+    var o = e.target.closest('[data-cart-open]');
+    if (o) { e.preventDefault(); openCart(o); }
+  });
+  cartOverlay.addEventListener('click', function (e) {
+    if (e.target === cartOverlay || e.target.closest('[data-cart-close]')) { closeCart(); return; }
+    var q = e.target.closest('[data-cq]');
+    if (q) {
+      var name = q.getAttribute('data-name'), d = +q.getAttribute('data-cq');
+      changeQty(name, d);
+      var again = cartOverlay.querySelector('[data-name="' + name.replace(/"/g, '\\"') + '"][data-cq="' + d + '"]');
+      if (again) again.focus(); else document.getElementById('cart-title').focus();
+      return;
+    }
+    var r = e.target.closest('[data-cremove]');
+    if (r) { var nm = r.getAttribute('data-cremove'); delete cart[nm]; saveCart(); updateCartUi(); refreshCardControl(byName(nm)); renderCartList(); document.getElementById('cart-title').focus(); return; }
+    if (e.target.closest('[data-cart-to-catalog]')) { closeCart(); document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' }); }
+  });
+  document.getElementById('cart-next').addEventListener('click', function () { setStep(2); document.getElementById('co-name').focus(); });
+  document.getElementById('cart-back').addEventListener('click', function () { setStep(1); document.getElementById('cart-title').focus(); });
+  document.getElementById('cart-edit').addEventListener('click', function () { setStep(2); document.getElementById('co-name').focus(); });
+  document.getElementById('cart-finish').addEventListener('click', function () {
+    var names = Object.keys(cart);
+    cart = {}; saveCart(); updateCartUi();
+    names.forEach(function (n) { refreshCardControl(byName(n)); });
+    closeCart(); toast('Спасибо! Корзина очищена');
+  });
+  document.getElementById('m-add').addEventListener('click', function () {
+    var i = modalIndex; closeModal(); addToCart(i, null);
+  });
+
+  // checkout
+  var coDate = document.getElementById('co-date');
+  (function () {
+    var minsk = new Date(Date.now() + 3 * 3600 * 1000);
+    var today = minsk.toISOString().slice(0, 10);
+    coDate.min = today; coDate.value = today;
+  })();
+  function coErr(id, msg) {
+    var f = document.getElementById(id);
+    document.getElementById(id + '-err').textContent = msg;
+    f.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    return !msg;
+  }
+  paneForm.addEventListener('input', function (e) { if (e.target.id && document.getElementById(e.target.id + '-err')) coErr(e.target.id, ''); });
+  paneForm.addEventListener('change', function (e) { if (e.target.id && document.getElementById(e.target.id + '-err')) coErr(e.target.id, ''); });
+  function fmtDate(v) { var p = v.split('-'); return p.length === 3 ? p[2] + '.' + p[1] + '.' + p[0] : v; }
+  function orderText() {
+    var f = paneForm.elements, lines = ['Здравствуйте! Хочу заказать:'];
+    Object.keys(cart).forEach(function (n) { var b = bouquets[byName(n)]; lines.push('• ' + n + ' × ' + cart[n] + ' — ' + byn(b.price * cart[n])); });
+    lines.push('Итого за букеты: ' + byn(cartTotal()) + ' (без доставки)', '');
+    lines.push('Заказчик: ' + f.name.value.trim() + ', ' + f.phone.value.trim());
+    if (f.recipient.value.trim()) lines.push('Получатель: ' + f.recipient.value.trim());
+    lines.push('Адрес: ' + f.address.value.trim());
+    lines.push('Доставка: ' + fmtDate(f.date.value) + ', ' + f.time.value);
+    if (f.card.value.trim()) lines.push('Открытка: «' + f.card.value.trim() + '»');
+    lines.push('Оплата: ' + paneForm.querySelector('input[name="pay"]:checked').value);
+    return lines.join('\n');
+  }
+  paneForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var via = e.submitter && e.submitter.getAttribute('data-via') || 'wa';
+    var f = paneForm.elements, ok = true, first = null;
+    function check(good, id, msg) { coErr(id, good ? '' : msg); if (!good && !first) first = document.getElementById(id); ok = ok && good; }
+    var digits = f.phone.value.replace(/\D/g, '');
+    check(f.name.value.trim().length >= 2, 'co-name', 'Напишите имя — хотя бы две буквы.');
+    check(digits.length >= 9 && digits.length <= 13, 'co-phone', 'Проверьте номер: например, +375 29 123-45-67.');
+    check(f.address.value.trim().length >= 6, 'co-address', 'Укажите улицу и дом, чтобы курьер нашёл адрес.');
+    check(!!f.date.value && f.date.value >= coDate.min, 'co-date', 'Выберите сегодняшнюю или более позднюю дату.');
+    check(f.consent.checked, 'co-consent', 'Без согласия мы не сможем выполнить заказ.');
+    if (!ok) { first.focus(); return; }
+    var text = orderText();
+    document.getElementById('order-text').textContent = text;
+    document.getElementById('copy-order-note').textContent = '';
+    if (via === 'wa') {
+      var a = document.createElement('a');
+      a.href = 'https://wa.me/' + PHONE_DIGITS + '?text=' + encodeURIComponent(text);
+      a.target = '_blank'; a.rel = 'noopener';
+      document.body.appendChild(a); a.click(); a.remove();
+      document.getElementById('done-title').textContent = 'Осталось нажать «Отправить» в WhatsApp';
+      document.getElementById('done-text').textContent = 'Мы открыли чат с магазином, текст заказа уже вставлен. Отправьте его — флорист ответит и подтвердит заказ. Если WhatsApp не открылся, скопируйте текст ниже.';
+    } else {
+      document.getElementById('done-title').textContent = 'Позвоните и продиктуйте заказ';
+      document.getElementById('done-text').textContent = 'Номер магазина откроется в окне. Заказ ниже — прочитайте его флористу или отправьте в любой мессенджер.';
+    }
+    setStep(3);
+    document.getElementById('done-title').focus();
+    if (via === 'call') {
+      var link = document.createElement('a'); link.href = 'tel:+' + PHONE_DIGITS;
+      link.setAttribute('data-call-title', 'Продиктуйте заказ');
+      link.setAttribute('data-call-sub', 'Ежедневно с 9:00 до 21:00. Текст заказа остался в корзине.');
+      if (canDial) { link.click(); } else { openCall(link); callFrom = document.getElementById('copy-order'); }
+    }
+  });
+  document.getElementById('copy-order').addEventListener('click', function () {
+    var note = document.getElementById('copy-order-note'), text = document.getElementById('order-text').textContent;
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('order-text'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      note.textContent = 'Текст выделен — скопируйте его.';
+    }
+    try { navigator.clipboard.writeText(text).then(function () { note.textContent = 'Текст заказа скопирован.'; }, fallback); } catch (err) { fallback(); }
+  });
+
   /* catalog */
   var grid = document.getElementById('grid');
   function renderGrid(filter, animate) {
@@ -1105,7 +1621,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
         '<img decoding="async" src="' + IMG[b.img] + '" alt="' + esc(b.alt) + '" loading="lazy"></button>' + favButton(b) + '</div>' +
         '<div style="display:flex;flex-direction:column;gap:6px"><div class="card-top"><h3>' + esc(b.name) + '</h3>' +
         '<span class="price">' + byn(b.price) + '</span></div><p>' + esc(b.desc) + '</p></div>' +
-        '<button class="btn btn-outline btn-sm" type="button" data-pick="' + i + '">Заказать</button></article>';
+        cardControl(i) + '</article>';
     }).join('');
     if (animate) {
       void grid.offsetWidth; // start from the hidden state, then show the new cards in order
@@ -1121,6 +1637,12 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
     });
   });
   grid.addEventListener('click', function (e) {
+    var c = e.target.closest('[data-add],[data-inc],[data-dec]');
+    if (c) {
+      var k = +(c.getAttribute('data-add') || c.getAttribute('data-inc') || c.getAttribute('data-dec'));
+      if (c.hasAttribute('data-dec')) changeQty(bouquets[k].name, -1); else addToCart(k, c);
+      return;
+    }
     var f = e.target.closest('[data-fav]');
     if (f) { toggleFav(f); return; }
     var t = e.target.closest('[data-pick]');
@@ -1128,14 +1650,14 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
   });
 
   /* order modal */
-  var overlay = document.getElementById('overlay'), lastFocus = null;
+  var overlay = document.getElementById('overlay'), lastFocus = null, modalIndex = 0;
   function openModal(i, from) {
     var b = bouquets[i];
     lastFocus = from || null;
     document.getElementById('m-img').src = IMG[b.img];
     document.getElementById('m-img').alt = b.alt;
     document.getElementById('m-name').textContent = b.name;
-    document.getElementById('m-name2').textContent = b.name;
+    modalIndex = i;
     document.getElementById('m-price').textContent = byn(b.price);
     document.getElementById('m-desc').textContent = b.desc;
     overlay.hidden = false;
@@ -1155,6 +1677,8 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
     if (!callOverlay.hidden) closeCall();
+    else if (!cartOverlay.hidden) closeCart();
+    else if (!favOverlay.hidden) closeFav();
     else if (!overlay.hidden) closeModal();
     else if (!quizOverlay.hidden) closeQuiz();
     else if (siteHeader.classList.contains('menu-open')) { setMenu(false); menuBtn.focus(); }
@@ -1226,7 +1750,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
         '<div class="q-res-body">' + (n === 0 ? '<span class="q-badge">Лучшее совпадение</span>' : '') +
         '<div class="q-res-head"><b>' + esc(r.b.name) + '</b><span class="price">' + byn(r.b.price) + '</span></div>' +
         '<p class="q-why">' + esc(why) + '</p>' +
-        '<button class="btn btn-primary btn-sm" type="button" data-quiz-pick="' + r.i + '">Заказать</button></div></div>';
+        '<button class="btn btn-primary btn-sm" type="button" data-quiz-pick="' + r.i + '">В корзину</button></div></div>';
     }).join('');
     qResults.classList.remove('step-in'); void qResults.offsetWidth; qResults.classList.add('step-in');
   }
@@ -1259,7 +1783,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
       return;
     }
     var pick = e.target.closest('[data-quiz-pick]');
-    if (pick) { closeQuiz(true); openModal(+pick.getAttribute('data-quiz-pick'), quizFrom); }
+    if (pick) { closeQuiz(true); addToCart(+pick.getAttribute('data-quiz-pick'), null); openCart(quizFrom); }
   });
   qBack.addEventListener('click', function () {
     if (!qResults.hidden) { quizStep = QUIZ.length - 1; } else if (quizStep > 0) { quizStep--; }
@@ -1269,7 +1793,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
 
   /* keep keyboard focus inside an open window */
   function topDialog() {
-    var ids = ['call-overlay', 'overlay', 'quiz-overlay'];
+    var ids = ['call-overlay', 'cart-overlay', 'fav-overlay', 'overlay', 'quiz-overlay'];
     for (var k = 0; k < ids.length; k++) { var el = document.getElementById(ids[k]); if (el && !el.hidden) return el; }
     return null;
   }
@@ -1282,7 +1806,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
     if (!f.length) return;
     var first = f[0], last = f[f.length - 1], cur = document.activeElement;
     if (!d.contains(cur)) { e.preventDefault(); first.focus(); }
-    else if (e.shiftKey && (cur === first || cur === qTitle)) { e.preventDefault(); last.focus(); }
+    else if (e.shiftKey && (cur === first || cur === qTitle || cur.id === 'cart-title' || cur.id === 'fav-title' || cur.id === 'done-title')) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && cur === last) { e.preventDefault(); first.focus(); }
   });
 
@@ -1362,8 +1886,13 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
   var fab = document.getElementById('fab');
   function onScroll() {
     var main = !document.getElementById('view-main').hidden;
-    var calm = overlay.hidden && (!quizOverlay || quizOverlay.hidden) && (!callOverlay || callOverlay.hidden);
+    var calm = overlay.hidden && (!quizOverlay || quizOverlay.hidden) && (!callOverlay || callOverlay.hidden) && (!cartOverlay || cartOverlay.hidden) && (typeof favOverlay === 'undefined' || !favOverlay || favOverlay.hidden);
     fab.classList.toggle('on', main && calm && window.scrollY > 560);
+    var fc = document.getElementById('fab-cart');
+    var cartOn = main && calm && window.scrollY > 560 && typeof cartCount === 'function' && cartCount() > 0;
+    if (fc) fc.classList.toggle('on', cartOn);
+    var ff = document.getElementById('fab-fav');
+    if (ff) { ff.classList.toggle('on', main && calm && window.scrollY > 560 && typeof favs !== 'undefined' && favs.length > 0); ff.classList.toggle('lift', cartOn); }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -1375,7 +1904,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
     el.style.setProperty('--d', delay + 'ms');
     el.classList.add('in');
     // after the entrance, hand the element back to its own hover styles
-    setTimeout(function () { el.classList.remove('rv', 'in'); el.style.removeProperty('--d'); }, delay + 950);
+    setTimeout(function () { el.classList.remove('rv', 'in'); el.style.removeProperty('--d'); }, delay + 1500);
   }
   if ('IntersectionObserver' in window && !calmMotion) {
     revealIo = new IntersectionObserver(function (entries) {
@@ -1567,7 +2096,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
   /* copy protection */
   function canCopy(node) {
     var el = node && (node.nodeType === 1 ? node : node.parentElement);
-    return !!(el && el.closest('input, textarea, .phone-big'));
+    return !!(el && el.closest('input, textarea, .phone-big, .order-text'));
   }
   document.addEventListener('contextmenu', function (e) { if (!canCopy(e.target)) e.preventDefault(); });
   document.addEventListener('dragstart', function (e) { if (e.target && e.target.tagName === 'IMG') e.preventDefault(); });
@@ -1616,6 +2145,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
 
   renderGrid('all', false);
   syncFavChip();
+  updateCartUi();
   observe(document.querySelectorAll('#view-main .rv:not(.card), footer .rv'));
   route();
 })();
