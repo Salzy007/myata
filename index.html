@@ -12,7 +12,7 @@
 <style>
 /* Layout: one long scroll — arched hero photo, promise cards, white catalog band, FAQ, sage call block, legal footer. Single light look by choice. */
 :root{
-  --bg:#FBF7F4; --surface:#FFFFFF; --ink:#2E2A2B; --muted:#5A5254; --soft:#6B6164;
+  --bg:#FBF7F4; --surface:#FFFFFF; --ink:#2A2527; --muted:#4D4547; --soft:#645B5E;
   --line:#EADFDC; --chip-line:#E2D6D3; --blush:#F3DDE0; --blush-2:#F1E6E3;
   --accent:#9E4458; --accent-ink:#7A3243; --err:#A3263C; --star:#C24E68; --sage:#536E5B; --sage-ink:#4A5A4E; --sage-bg:#EEF2EC; --night:#2F2729; --night-ink:#F3ECEA; --night-muted:#BFAFB1; --night-line:rgba(255,255,255,.12);
   --display:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -573,7 +573,39 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
   .doc-ico{width:48px;height:48px;border-radius:16px}
 }
 
+/* ===== typography scale ===== */
+:root{--fs-sm:14px;--fs-body:16.5px;--fs-lead:18px;--fs-h4:20px;--fs-h3:clamp(24px,2.3vw,28px);--fs-h2:clamp(36px,4.6vw,56px)}
+body{font-size:var(--fs-body);line-height:1.65}
+.h2{font-size:var(--fs-h2);font-weight:600;letter-spacing:-.01em;line-height:1.08}
+.eyebrow{font-size:var(--fs-sm);letter-spacing:.14em;font-weight:700}
+.lead,.about-text p,.call-text p,.review-intro > p,.cat-head p,.reviews-head p{font-size:var(--fs-lead);line-height:1.7;color:var(--muted)}
+.card h3,.q-res-head b,.ci-body b,.qb-text b{font-size:var(--fs-h3);font-weight:600;line-height:1.15}
+.promise h3,.tile h3,.box h4,.doc-list h3{font-size:var(--fs-h4);font-weight:700;line-height:1.3}
+.card p,.promise p,.faq-a,.dots li,.reason span,.doc-card p,.doc-card .box p,.doc-card .tile p{font-size:var(--fs-body);line-height:1.65;color:var(--muted)}
+.s-text small,.r-steps span,.q-why{font-size:var(--fs-sm);line-height:1.55}
+.faq-q{font-size:19px;font-weight:600}
+.price{font-size:18px;font-weight:700;color:var(--accent-ink)}
+.r-steps b,.s-text b{font-size:17px}
+.field label,.check,.foot-col,.open-status,.review-note{font-size:15px}
+.foot-tag,.qb-text{font-size:16px}
+.form-head span,.field label,.field legend,.review figcaption,.copy-note,.ci-body .price,.card-qty span,.toc-help,.doc-card-head p{font-size:15px}
+.field label small,.field legend small{font-size:14px;font-weight:500;color:var(--soft)}
+.field-error,.counter,.steps-title,.quiz-step{font-size:14px}
+.cart-steps li,.foot-col h4{font-size:13px}
+/* ===== photo hover + sheen ===== */
+.about-media,.card-photo{position:relative}
+.arch img,.about-media img,.review-photo img,.card-photo img{transition:scale .8s cubic-bezier(.2,.7,.2,1),transform .5s ease}
+.card:hover .card-photo img{transform:none;scale:1.06}
+.about-media:hover img,.review-photo:hover img{scale:1.07}
+.hero-media:hover .arch img{scale:1.05}
+.arch::after,.about-media::after,.review-photo .arch-sm::after,.card-photo::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.42) 50%,transparent 65%);transform:translateX(-120%);transition:transform 0s}
+.hero-media:hover .arch::after,.about-media:hover::after,.review-photo:hover .arch-sm::after,.card:hover .card-photo::after{transform:translateX(120%);transition:transform 1.1s ease}
+/* ===== photo entrance ===== */
+.js .rv img{scale:1.14}
+.js .rv.in img{scale:1;transition:scale 1.4s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
 @media (prefers-reduced-motion: reduce){
+  .js .rv img{scale:1}.arch::after,.about-media::after,.review-photo .arch-sm::after,.card-photo::after{display:none}
+  .arch img,.about-media img,.review-photo img,.card-photo img{transition:none}
   .js .rv{opacity:1;transform:none}
   *,*::before,*::after{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}.petal{display:none}
@@ -1761,7 +1793,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
     el.style.setProperty('--d', delay + 'ms');
     el.classList.add('in');
     // after the entrance, hand the element back to its own hover styles
-    setTimeout(function () { el.classList.remove('rv', 'in'); el.style.removeProperty('--d'); }, delay + 950);
+    setTimeout(function () { el.classList.remove('rv', 'in'); el.style.removeProperty('--d'); }, delay + 1500);
   }
   if ('IntersectionObserver' in window && !calmMotion) {
     revealIo = new IntersectionObserver(function (entries) {
