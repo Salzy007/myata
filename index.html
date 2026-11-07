@@ -728,6 +728,33 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
 @keyframes hsFill{to{transform:none}}
 @media (max-width:860px){.how-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:480px){.how-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.how-step{font-size:14px;padding:8px 10px 12px}.mf{border-radius:20px}.how-play{right:10px;bottom:10px}.how-sound{right:60px;bottom:10px;width:44px;padding:0;justify-content:center}.how-sound .hs-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
+/* ===== tactile press everywhere ===== */
+.logo,.foot-logo{display:inline-block;transition:scale .15s ease,color .2s}
+.logo:active,.foot-logo:active{scale:.96}
+.to-top{transition:background-color .2s,scale .15s ease}
+.to-top:active{scale:.94}
+.doc-toc .toc-link{transition:background-color .2s,box-shadow .2s,scale .15s ease}
+.doc-toc .toc-link:active{scale:.97}
+.link{transition:opacity .2s,scale .15s ease}
+.link:not(.nav-tab){display:inline-flex}
+@media (min-width:1021px){.nav-tab{transition:opacity .2s,scale .15s ease}.nav-tab:active{scale:.93;opacity:.7}}
+.link:not(.nav-tab):active{scale:.95}
+.faq-q{transition:color .2s,scale .15s ease}
+.faq-q:active{scale:.985}
+.faq-q:active svg{scale:.85}
+.faq-q svg{transition:transform .3s ease,scale .15s ease}
+.fav-photo{transition:scale .15s ease}
+.fav-photo:active{scale:.94}
+.ci-remove{transition:background-color .2s,color .2s,scale .15s ease}
+.ci-remove:active{scale:.86}
+.check input{transition:background-color .15s,border-color .15s,transform .12s,scale .12s ease}
+.check:active input{scale:.86}
+.stars svg{transition:fill .15s,transform .15s,scale .12s ease}
+.stars label:active svg{scale:.82}
+a:not([class]){transition:opacity .15s}
+a:not([class]):active{opacity:.6}
+select{transition:scale .12s ease}
+select:active{scale:.98}
 /* ===== typography scale ===== */
 :root{--fs-sm:14px;--fs-body:16.5px;--fs-lead:18px;--fs-h4:20px;--fs-h3:clamp(24px,2.3vw,28px);--fs-h2:clamp(36px,4.6vw,56px)}
 body{font-size:var(--fs-body);line-height:1.65}
@@ -1482,6 +1509,8 @@ body{font-size:var(--fs-body);line-height:1.65}
 
 <script>
 (function () {
+  // iPhone shows :active (pressed) styles only when the page listens to touches
+  document.addEventListener('touchstart', function () {}, { passive: true });
   /* layers (windows and side panels) open and close with a short animation */
   function reduceMotion() { return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
   var LAYERS = ['overlay', 'quiz-overlay', 'call-overlay', 'cart-overlay', 'fav-overlay'];
