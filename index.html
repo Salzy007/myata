@@ -634,7 +634,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
 .how-side{display:flex;flex-direction:column;gap:18px;min-width:0}
 @media (min-width:1000px){.how-stage{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:32px;align-items:center}.how-side .how-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.how-cap{flex-direction:column;align-items:flex-start;min-height:7.5em}}
 .mf{position:relative;border-radius:28px;overflow:hidden;background:#F6ECE9;box-shadow:0 30px 60px -40px rgba(46,42,43,.45)}
-.mf svg{display:block;width:100%;height:auto;font-family:Manrope,system-ui,sans-serif}
+.mf > svg{display:block;width:100%;height:auto;font-family:Manrope,system-ui,sans-serif}
 .mf .scene{opacity:0;transition:opacity .5s ease}
 .mf[data-scene="0"] .s0,.mf[data-scene="1"] .s1,.mf[data-scene="2"] .s2,.mf[data-scene="3"] .s3,.mf[data-scene="4"] .s4,.mf[data-scene="5"] .s5{opacity:1}
 .mf .pop,.mf .fl,.mf .lf,.mf .spark,.mf .heart,.mf .ring,.mf .card2,.mf .bow,.mf .wrapL,.mf .wrapR,.mf .wrapF,.mf .cam,.mf .polar,.mf .give,.mf .door,.mf .pin,.mf .bladeL,.mf .bladeR,.mf .bob,.mf .wheel,.mf .ph{transform-box:fill-box;transform-origin:center}
@@ -694,7 +694,16 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
 .mf[data-scene="5"] .s5 .pop{animation:mfPop .5s cubic-bezier(.3,1.4,.5,1) backwards}
 .mf.paused *{animation-play-state:paused!important}
 .how-play{position:absolute;right:16px;bottom:16px;width:44px;height:44px;border:0;border-radius:999px;background:rgba(255,255,255,.92);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 20px -10px rgba(46,42,43,.5);transition:transform .15s,background-color .2s}
-.how-play:hover{background:#fff}
+.how-play:hover,.how-sound:hover{background:#fff}
+.how-sound{white-space:nowrap;position:absolute;right:70px;bottom:16px;height:44px;padding:0 16px 0 13px;border:0;border-radius:999px;background:rgba(255,255,255,.92);color:var(--ink);display:flex;align-items:center;gap:8px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px -10px rgba(46,42,43,.5);transition:transform .15s,background-color .2s,color .2s}
+.how-sound:active{transform:scale(.94)}
+.how-sound svg{flex:none}
+.how-sound .i-on,.how-sound[aria-pressed="true"] .i-off{display:none}
+.how-sound[aria-pressed="true"] .i-on{display:block}
+.how-sound[aria-pressed="true"]{background:var(--accent);color:#fff}
+.how-sound[aria-pressed="false"]::after{content:"";position:absolute;inset:-4px;border-radius:inherit;border:2px solid rgba(255,255,255,.8);animation:soundHint 2.4s ease-out 1.5s 3 backwards;opacity:0;pointer-events:none}
+@keyframes soundHint{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.25)}}
+.how-play:focus-visible,.how-sound:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .how-play:active{transform:scale(.92)}
 .how-play .i-play,.how-play[aria-pressed="true"] .i-pause{display:none}
 .how-play[aria-pressed="true"] .i-play{display:block}
@@ -718,7 +727,7 @@ h1,h2,h3,.h2,.form-head h3,.review-empty h3{text-wrap:balance}
 .how-stage.static .how-step[aria-current="step"] .hs-bar::after{animation:none;transform:none}
 @keyframes hsFill{to{transform:none}}
 @media (max-width:860px){.how-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:480px){.how-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.how-step{font-size:14px;padding:8px 10px 12px}.mf{border-radius:20px}.how-play{right:10px;bottom:10px}}
+@media (max-width:480px){.how-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.how-step{font-size:14px;padding:8px 10px 12px}.mf{border-radius:20px}.how-play{right:10px;bottom:10px}.how-sound{right:60px;bottom:10px;width:44px;padding:0;justify-content:center}.how-sound .hs-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}
 /* ===== typography scale ===== */
 :root{--fs-sm:14px;--fs-body:16.5px;--fs-lead:18px;--fs-h4:20px;--fs-h3:clamp(24px,2.3vw,28px);--fs-h2:clamp(36px,4.6vw,56px)}
 body{font-size:var(--fs-body);line-height:1.65}
@@ -896,7 +905,7 @@ body{font-size:var(--fs-body);line-height:1.65}
   <g class="ph"><rect x="236" y="56" width="168" height="300" rx="28" fill="#2E2A2B"/><rect x="246" y="70" width="148" height="272" rx="20" fill="#FBF7F4"/>
   <rect x="296" y="78" width="48" height="6" rx="3" fill="#E2D6D3"/>
   <g class="pop" style="animation-delay:0.3s"><rect x="256" y="108" width="128" height="46" rx="14" fill="#9E4458" stroke="none"/><text x="268" y="127" fill="#fff" font-size="12.5" font-weight="600">Здравствуйте!</text><text x="268" y="144" fill="#fff" font-size="12.5" font-weight="600">Букет на завтра?</text></g>
-  <g class="pop" style="animation-delay:1.1s"><rect x="256" y="170" width="118" height="46" rx="14" fill="#fff" stroke="#EADFDC"/><text x="268" y="189" fill="#2E2A2B" font-size="12.5" font-weight="600">Конечно! Какой</text><text x="268" y="206" fill="#2E2A2B" font-size="12.5" font-weight="600">повод и бюджет?</text></g>
+  <g class="pop" style="animation-delay:1.1s"><rect x="252" y="170" width="134" height="46" rx="14" fill="#fff" stroke="#EADFDC"/><text x="264" y="189" fill="#2E2A2B" font-size="12.5" font-weight="600">Конечно! Какой</text><text x="264" y="206" fill="#2E2A2B" font-size="12.5" font-weight="600">повод и бюджет?</text></g>
   <g class="pop" style="animation-delay:1.9s"><rect x="266" y="232" width="118" height="46" rx="14" fill="#9E4458" stroke="none"/><text x="278" y="251" fill="#fff" font-size="12.5" font-weight="600">День рождения</text><text x="278" y="268" fill="#fff" font-size="12.5" font-weight="600">до 200 BYN</text></g>
   <g class="pop" style="animation-delay:2.6s"><rect x="256" y="294" width="58" height="26" rx="13" fill="#fff" stroke="#EADFDC"/><circle cx="273" cy="307" r="3" class="dot" fill="#9E4458"/><circle cx="285" cy="307" r="3" class="dot" style="animation-delay:.15s" fill="#9E4458"/><circle cx="297" cy="307" r="3" class="dot" style="animation-delay:.3s" fill="#9E4458"/></g></g>
   <g transform="translate(456 110)"><g class="ring"><circle r="26" fill="#9E4458"/><path d="M-9 -9c2-2 4-2 5 0l3 4c1 2 0 3-1 4l-1 1c1 3 4 6 7 7l1-1c1-1 3-2 4-1l4 3c2 1 2 3 0 5-3 3-7 3-11 1-5-3-9-7-12-12-2-4-2-8 1-11z" fill="#fff"/></g></g>
@@ -941,6 +950,7 @@ body{font-size:var(--fs-body);line-height:1.65}
   <g class="pop" style="animation-delay:2.2s"><rect x="92" y="96" width="138" height="34" rx="17" fill="#536E5B"/><circle cx="112" cy="113" r="9" fill="#fff" opacity=".25"/><g transform="translate(112 113) scale(.8)"><path d="M-6 0 L-2 4 L6 -5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g><text x="128" y="118" fill="#fff" font-size="13" font-weight="700">Доставлено</text></g>
 </g>
           </svg>
+          <button class="how-sound" type="button" id="how-sound" aria-pressed="false"><svg class="i-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M22 9l-6 6M16 9l6 6"/></svg><svg class="i-on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg><span class="hs-label">Со звуком</span></button>
           <button class="how-play" type="button" id="how-play" aria-pressed="false" aria-label="Пауза"><svg class="i-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg><svg class="i-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
         </div>
         <div class="how-side">
@@ -2445,11 +2455,97 @@ body{font-size:var(--fs-body);line-height:1.65}
     document.addEventListener('visibilitychange', sync);
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (en) {
-        var was = visible; visible = en[0].isIntersecting;
+        var e0 = en[en.length - 1], was = visible; visible = e0.isIntersecting && e0.intersectionRatio >= 0.3;
         if (visible && !was && !timer && left === MS) show(idx);
         sync();
-      }, { threshold: 0.35 }).observe(mf);
+      }, { threshold: [0, 0.15, 0.3, 0.5, 0.75, 1] }).observe(mf);
     } else { visible = true; }
+    /* sound: generated in the browser (Web Audio), starts only after the visitor turns it on */
+    var soundBtn = document.getElementById('how-sound'), soundOn = false, AC = window.AudioContext || window.webkitAudioContext;
+    var ctx = null, master = null, bus = null, noiseBuf = null;
+    if (!AC) soundBtn.hidden = true;
+    function audioInit() {
+      ctx = new AC();
+      var comp = ctx.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 4; comp.connect(ctx.destination);
+      master = ctx.createGain(); master.gain.value = 1.8; master.connect(comp);
+      noiseBuf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+      var d = noiseBuf.getChannelData(0); for (var k = 0; k < d.length; k++) d[k] = Math.random() * 2 - 1;
+    }
+    function env(g, t, peak, a, r) { g.gain.setValueAtTime(0, 0); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + r); }
+    function tone(t, f, o) {
+      o = o || {}; var osc = ctx.createOscillator(), g = ctx.createGain();
+      osc.type = o.type || 'sine'; osc.frequency.setValueAtTime(f, t);
+      if (o.to) osc.frequency.exponentialRampToValueAtTime(o.to, t + (o.glide || 0.08));
+      if (o.detune) osc.detune.value = o.detune;
+      env(g, t, o.gain || 0.15, o.a || 0.005, o.r || 0.3);
+      var out = g;
+      if (o.lp) { var lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = o.lp; g.connect(lp); out = lp; }
+      osc.connect(g); out.connect(bus); osc.start(t); osc.stop(t + (o.a || 0.005) + (o.r || 0.3) + 0.05);
+    }
+    function noise(t, dur, o) {
+      o = o || {}; var src = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+      src.buffer = noiseBuf; src.loop = true; f.type = o.type || 'bandpass'; f.frequency.setValueAtTime(o.f || 2000, t); f.Q.value = o.q || 0.8;
+      if (o.to) f.frequency.exponentialRampToValueAtTime(o.to, t + dur);
+      env(g, t, o.gain || 0.08, o.a || 0.01, dur);
+      src.connect(f); f.connect(g); g.connect(bus); src.start(t); src.stop(t + dur + 0.1);
+    }
+    var C5 = 523.25, D5 = 587.33, E5 = 659.25, G5 = 783.99, A5 = 880, C6 = 1046.5, E6 = 1318.5;
+    function chime(t, f, v) { tone(t, f, { gain: v || 0.09, r: 1.4 }); tone(t, f * 2.76, { gain: (v || 0.09) * 0.25, r: 0.6 }); }
+    function pop(t, f) { tone(t, f || 520, { to: (f || 520) * 1.9, glide: 0.07, gain: 0.12, r: 0.13 }); }
+    function pad(t, notes) {
+      notes.forEach(function (f) {
+        [-6, 6].forEach(function (dt) { tone(t, f, { type: 'triangle', detune: dt, gain: 0.028, a: 0.9, r: 3.6, lp: 1100 }); });
+      });
+    }
+    var CHORDS = [[174.61, 220, 261.63, 329.63], [146.83, 174.61, 220, 329.63], [116.54, 146.83, 174.61, 220],
+                  [130.81, 164.81, 220, 293.66], [110, 130.81, 164.81, 196], [174.61, 220, 261.63, 392]];
+    var SFX = [
+      function (t) { tone(t + 0.05, 880, { gain: 0.05, r: 0.12 }); tone(t + 0.2, 880, { gain: 0.05, r: 0.12 }); pop(t + 0.32, 600); pop(t + 1.12, 480); pop(t + 1.92, 640); [2.7, 2.85, 3.0].forEach(function (d) { noise(t + d, 0.03, { type: 'highpass', f: 5000, gain: 0.05 }); }); },
+      function (t) { noise(t + 0.1, 0.6, { f: 500, to: 2200, gain: 0.04 }); [0, 0.5, 1.0].forEach(function (d) { noise(t + d + 0.2, 0.04, { f: 3200, q: 2, gain: 0.09 }); tone(t + d + 0.2, 2400, { gain: 0.03, r: 0.04 }); });
+        [C5, D5, E5, G5, A5].forEach(function (f, k) { chime(t + 0.72 + k * 0.16, f, 0.07); }); chime(t + 1.75, C6, 0.05); chime(t + 2.15, E6, 0.04); },
+      function (t) { [0.2, 0.45, 0.8].forEach(function (d) { noise(t + d, 0.35, { f: 1800, q: 0.6, gain: 0.07 }); noise(t + d + 0.12, 0.2, { f: 3500, q: 1, gain: 0.04 }); });
+        chime(t + 1.45, G5, 0.08); chime(t + 1.6, C6, 0.06); pop(t + 2.05, 420); },
+      function (t) { noise(t, 0.4, { f: 600, to: 1800, gain: 0.04 }); noise(t + 0.8, 0.03, { type: 'highpass', f: 3000, gain: 0.14 }); noise(t + 0.9, 0.05, { f: 1500, q: 3, gain: 0.1 }); tone(t + 0.8, 1800, { gain: 0.03, r: 0.05 });
+        pop(t + 1.52, 560); chime(t + 2.32, E5, 0.07); chime(t + 2.42, A5, 0.07); },
+      function (t) { var o = ctx.createOscillator(), o2 = ctx.createOscillator(), lp = ctx.createBiquadFilter(), g = ctx.createGain(), lfo = ctx.createOscillator(), lg = ctx.createGain();
+        o.type = 'sawtooth'; o.frequency.value = 58; o2.type = 'sawtooth'; o2.frequency.value = 87; lp.type = 'lowpass'; lp.frequency.value = 260;
+        lfo.frequency.value = 7; lg.gain.value = 4; lfo.connect(lg); lg.connect(o.frequency);
+        g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.022, t + 0.5); g.gain.setValueAtTime(0.022, t + 3.4); g.gain.exponentialRampToValueAtTime(0.0001, t + 4.1);
+        o.connect(lp); o2.connect(lp); lp.connect(g); g.connect(bus); [o, o2, lfo].forEach(function (x) { x.start(t); x.stop(t + 4.2); });
+        noise(t, 1, { f: 400, to: 1200, gain: 0.03 }); [0.6, 1.8, 3.0].forEach(function (d) { tone(t + d, 1320, { gain: 0.035, r: 0.25 }); }); },
+      function (t) { [0, 0.18].forEach(function (d) { noise(t + d, 0.06, { type: 'lowpass', f: 400, gain: 0.14 }); tone(t + d, 140, { gain: 0.08, r: 0.08 }); });
+        noise(t + 0.25, 0.7, { f: 300, to: 900, gain: 0.03 }); noise(t + 0.75, 0.5, { f: 1600, q: 0.6, gain: 0.04 });
+        [1.3, 1.7, 2.1].forEach(function (d, k) { chime(t + d, [E5, G5, C6][k], 0.05); });
+        [C5, E5, G5, C6].forEach(function (f, k) { chime(t + 2.25 + k * 0.09, f, 0.08); }); }
+    ];
+    function sceneSound(i) {
+      if (!soundOn || !ctx) return;
+      if (bus) { var old = bus; old.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.08); setTimeout(function () { try { old.disconnect(); } catch (err) {} }, 900); }
+      bus = ctx.createGain(); bus.connect(master);
+      var t = ctx.currentTime + 0.03;
+      pad(t, CHORDS[i]); SFX[i](t);
+    }
+    var showBase = show;
+    show = function (i) { showBase(i); sceneSound(i); };
+    var syncBase = sync;
+    sync = function () { syncBase(); if (ctx) { if (soundOn && running()) ctx.resume(); else ctx.suspend(); } };
+    soundBtn.addEventListener('click', function () {
+      soundOn = !soundOn;
+      soundBtn.setAttribute('aria-pressed', soundOn);
+      soundBtn.querySelector('.hs-label').textContent = soundOn ? 'Звук включён' : 'Со звуком';
+      soundBtn.setAttribute('aria-label', soundOn ? 'Выключить звук' : 'Включить звук');
+      if (soundOn) {
+        if (!ctx) audioInit();
+        ctx.resume();
+        if (userPaused) { userPaused = false; stage.classList.remove('static'); playBtn.setAttribute('aria-pressed', 'false'); playBtn.setAttribute('aria-label', 'Пауза'); }
+        pause(); show(idx); sync(); schedule();
+      } else if (ctx) {
+        if (bus) bus.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.05);
+        setTimeout(function () { if (!soundOn) ctx.suspend(); }, 300);
+      }
+    });
+    soundBtn.setAttribute('aria-label', 'Включить звук');
+
     show(0); sync();
   })();
 
