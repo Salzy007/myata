@@ -1152,6 +1152,41 @@ a,button,input,select,textarea,label,[role="button"]{touch-action:manipulation}
 @media (min-width:1021px){.shelf{margin-inline:0;padding-inline:0;overflow:visible}.shelf-item{flex:1 1 0}.shelf-item:nth-child(n+5),.shelf-all{display:none}}
 @media (max-width:560px){.occ-row{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--gutter-l) * -1) calc(var(--gutter-r) * -1);padding-inline:var(--gutter-l) var(--gutter-r)}.occ-row::-webkit-scrollbar{display:none}.occ{flex:none}.quick{padding-bottom:40px}}
 .chip,.btn-sm,.card [data-add]{min-height:44px}
+
+/* redesign 6: the rest of the page follows the peony + mint duo and the arch motif */
+/* header: 44px touch targets, mint hover */
+.nav-tab{min-height:44px}
+@media (min-width:1021px){.nav-tab:hover{background:var(--sage-bg)}}
+.logo-mark{border-radius:50% 50% 11px 11px/60% 60% 11px 11px}
+/* promises: round mint icons, serif titles */
+.promise .icon{border-radius:50%}
+.promise h3{font-family:var(--display);font-size:22px;font-weight:600;line-height:1.15}
+@media (max-width:560px){.promise h3{font-size:18px}.promise .icon{border-radius:50%}}
+/* about: the photo is an arch like in the hero, with a mint circle behind it */
+.about{overflow-x:clip}
+.about-media{position:relative;isolation:isolate;overflow:visible;background:none;border-radius:0}
+.about-media::before{content:"";position:absolute;left:-5%;bottom:-5%;width:46%;aspect-ratio:1;border-radius:50%;background:var(--sage-bg);z-index:-1}
+.about-media img{border-radius:999px 999px 28px 28px;background:var(--blush)}
+/* how it works: its own peony-tinted arched panel */
+.how{margin-top:80px;padding:clamp(84px,9vw,116px) clamp(20px,5vw,64px) clamp(40px,5vw,72px);background:var(--tint);border-radius:50% 50% 36px 36px/64px 64px 36px 36px}
+.how-count{color:var(--sage-ink)}
+.how-step.done .hs-num{color:var(--sage-ink)}
+@media (max-width:760px){.how{margin-inline:calc(var(--gutter-l) * -1) calc(var(--gutter-r) * -1);padding-inline:var(--gutter-l) var(--gutter-r);border-radius:50%/32px;margin-top:56px;padding-block:68px 48px}}
+/* reviews: the form panel gets an arched top */
+.reviews{padding-top:88px}
+.review-panel{border-radius:50% 50% 36px 36px/56px 56px 36px 36px;padding-top:clamp(72px,8vw,104px)}
+@media (max-width:560px){.review-panel{border-radius:50% 50% 28px 28px/36px 36px 28px 28px;padding-top:64px}}
+/* faq: heading and hint on the left, answers on the right */
+.faq{max-width:1100px;display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:24px clamp(32px,6vw,80px);align-items:start}
+.faq-head{display:flex;flex-direction:column;align-items:flex-start;gap:14px;position:sticky;top:104px}
+.faq-head p{margin:0;max-width:20em;font-size:16px;line-height:1.65;color:var(--muted)}
+.faq-q{min-height:64px;font-family:var(--display);font-size:24px;font-weight:600;line-height:1.2}
+.faq-q svg{box-sizing:border-box;width:40px;height:40px;padding:10px;border-radius:50%;background:var(--sage-bg);color:var(--sage-ink)}
+.faq-item.open .faq-q{color:var(--accent-text)}
+@media (max-width:860px){.faq{display:flex}.faq-head{position:static}.faq-q{font-size:21px}}
+/* footer: sentence-case column titles in the serif, no letter-spaced caps */
+.foot-col h4{font-family:var(--display);font-size:24px;font-weight:600;letter-spacing:0;text-transform:none;line-height:1.1}
+.foot-tag{font-size:16px}
 </style>
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__revealReady)document.documentElement.classList.remove('js')},3000);</script>
 
@@ -1477,7 +1512,11 @@ a,button,input,select,textarea,label,[role="button"]{touch-action:manipulation}
     </section>
 
     <section class="faq" id="faq">
-      <h2 class="h2 rv">Частые вопросы</h2>
+      <div class="faq-head rv">
+        <h2 class="h2">Частые вопросы</h2>
+        <p>Не нашли ответ? Напишите флористу — подскажем по составу, срокам и доставке.</p>
+        <a class="text-btn" href="#contacts">Связаться с нами</a>
+      </div>
       <div class="faq-list" id="faq-list"></div>
     </section>
 
