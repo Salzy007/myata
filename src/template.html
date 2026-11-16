@@ -70,7 +70,6 @@ html[data-theme-mode="auto"] .ti-auto,html[data-theme-mode="light"] .ti-light,ht
   --mf-bg:#261F21; --mf-b2:#26302A; --mf-them:#3A2F32;
   color-scheme:dark;
 }
-html.theme-anim,html.theme-anim *,html.theme-anim *::before,html.theme-anim *::after{transition:background-color .3s ease,color .3s ease,border-color .3s ease,fill .3s ease,box-shadow .3s ease!important}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;scrollbar-gutter:stable}
@@ -1123,6 +1122,10 @@ a,button,input,select,textarea,label,[role="button"]{touch-action:manipulation}
 @media (max-width:560px){.band{border-radius:50%/32px;padding-block:64px}}
 /* one font everywhere: buttons and fields take Manrope from the page, not the browser default */
 button,input,select,textarea{font-family:inherit}
+/* smooth theme switch: one GPU cross-fade instead of transitions on every element */
+::view-transition-old(root),::view-transition-new(root){animation-duration:.4s;animation-timing-function:ease}
+/* phones: no live blur under the sticky header (it repaints on every scroll frame); a nearly solid bar looks the same and scrolls smoothly */
+@media (max-width:1020px){.topbar{-webkit-backdrop-filter:none;backdrop-filter:none;background:color-mix(in srgb,var(--bg) 95%,transparent)}}
 </style>
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__revealReady)document.documentElement.classList.remove('js')},3000);</script>
 
@@ -1869,8 +1872,10 @@ button,input,select,textarea{font-family:inherit}
     function paint(animate) {
       var m = mode(), dk = window.__themeIsDark(m), cur = root.getAttribute('data-theme');
       if ((dk ? 'dark' : 'light') !== cur) {
-        if (animate) { root.classList.add('theme-anim'); setTimeout(function () { root.classList.remove('theme-anim'); }, 400); }
-        root.setAttribute('data-theme', dk ? 'dark' : 'light');
+        var apply = function () { root.setAttribute('data-theme', dk ? 'dark' : 'light'); };
+        // smooth switch: the browser cross-fades two snapshots on the GPU (no per-element transitions, no lag); browsers without it switch instantly
+        if (animate && document.startViewTransition && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) document.startViewTransition(apply);
+        else apply();
       }
       if (meta) meta.setAttribute('content', dk ? '#1F1A1B' : '#FBF7F4');
       document.querySelectorAll('[data-theme-cycle]').forEach(function (b) { b.setAttribute('aria-label', 'Тема: ' + names[m] + '. Нажмите, чтобы сменить'); });
