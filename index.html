@@ -20,7 +20,7 @@ var t=document.querySelector('meta[name="theme-color"]');if(t)t.setAttribute('co
   --bg:#FCF6F3; --surface:#FFFFFF; --ink:#2A2527; --muted:#4D4547; --soft:#645B5E;
   --line:#EADFDC; --chip-line:#E2D6D3; --blush:#F9DEE5; --blush-2:#F1E6E3;
   --accent:#A62B55; --accent-ink:#861F42; --err:#A3263C; --star:#C43A64; --sage:#2B7A62; --sage-ink:#1F5C49; --sage-bg:#E2F1EA; --night:#2A1A22; --night-ink:#F6EFE9; --night-muted:#BFAFB1; --night-line:rgba(255,255,255,.12);
-  --accent-text:#A62B55; --on-accent:#fff; --tint:#FBE8EE; --star-off:#E3CFCE; --box-line:#CDBBB9; --bar:rgba(252,246,243,.86); --glass:rgba(255,255,255,.92); --glass-soft:rgba(255,255,255,.55); --mf-bg:#F4E7E3; --band:#EAF4EE; --call-bg:#1F5E4C; --call-ink:#F6EFE9; --call-muted:#CFE5DB; --mf-b2:#DDEFE6; --mf-them:#F4ECE9; --scrim:rgba(46,42,43,.55);
+  --accent-text:#A62B55; --on-accent:#fff; --tint:#FBE8EE; --star-off:#E3CFCE; --box-line:#CDBBB9; --bar:rgba(252,246,243,.86); --glass:rgba(255,255,255,.92); --glass-soft:rgba(255,255,255,.55); --mf-bg:#F4E7E3; --band:#EAF4EE; --call-bg:#F9DEE5; --call-ink:#2A2527; --call-muted:#4D4547; --mf-b2:#DDEFE6; --mf-them:#F4ECE9; --scrim:rgba(46,42,43,.55);
   --display:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --body:'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --gutter-l:max(16px, env(safe-area-inset-left, 0px));
@@ -58,7 +58,7 @@ html[data-theme-mode="auto"] .ti-auto,html[data-theme-mode="light"] .ti-light,ht
   --tint:#3A2A2F; --star-off:#4A3F42; --box-line:#6A5B5E; --bar:rgba(31,26,27,.86);
   --glass:rgba(42,35,37,.92); --glass-soft:rgba(42,35,37,.55);
   --mf-bg:#261F21; --mf-b2:#1F3329; --mf-them:#3A2F32;
-  --band:#222B27; --call-bg:#1D3A30; --call-ink:#F3EAE4; --call-muted:#BFD8CC;
+  --band:#222B27; --call-bg:#3E2A31; --call-ink:#F3EAE4; --call-muted:#CFC3C0;
   color-scheme:dark;
 }
 html.theme-anim,html.theme-anim *,html.theme-anim *::before,html.theme-anim *::after{transition:background-color .3s ease,color .3s ease,border-color .3s ease,fill .3s ease,box-shadow .3s ease!important}
@@ -1116,8 +1116,7 @@ a,button,input,select,textarea,label,[role="button"]{touch-action:manipulation}
 .call-box .h2{color:var(--call-ink)}
 .call-text p,.call-side p,.call-side .open-status{color:var(--call-muted)}
 .call-hours b{color:var(--call-ink)}
-.call-box a:not(.btn){color:var(--call-ink);text-decoration:underline;text-underline-offset:3px}
-.call-box .btn-wa{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5)}
+.call-box a:not(.btn){color:var(--accent-text);text-decoration:underline;text-underline-offset:3px}
 .footer{border-radius:50% 50% 0 0/64px 64px 0 0;padding-top:96px}
 @media (max-width:560px){.band{border-radius:50%/32px;padding-block:64px}.footer{border-radius:50% 50% 0 0/32px 32px 0 0;padding-top:72px}.call-box{border-radius:50% 50% 28px 28px/44px 44px 28px 28px;padding-top:80px}}
 
