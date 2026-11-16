@@ -31,7 +31,7 @@ var t=document.querySelector('meta[name="theme-color"]');if(t)t.setAttribute('co
   --bg:#FBF7F4; --surface:#FFFFFF; --ink:#2A2527; --muted:#4D4547; --soft:#645B5E;
   --line:#EADFDC; --chip-line:#E2D6D3; --blush:#F3DDE0; --blush-2:#F1E6E3;
   --accent:#9E4458; --accent-ink:#7A3243; --err:#A3263C; --star:#C24E68; --sage:#536E5B; --sage-ink:#4A5A4E; --sage-bg:#EEF2EC; --night:#2F2729; --night-ink:#F3ECEA; --night-muted:#BFAFB1; --night-line:rgba(255,255,255,.12);
-  --accent-text:#9E4458; --on-accent:#fff; --tint:#F9EDEF; --how-bg:#FBE8EE; --star-off:#E3CFCE; --box-line:#CDBBB9; --bar:rgba(251,247,244,.86); --glass:rgba(255,255,255,.92); --glass-soft:rgba(255,255,255,.55); --mf-bg:#F4E7E3; --mf-b2:#E7EDE5; --mf-them:#F4ECE9; --scrim:rgba(46,42,43,.55);
+  --accent-text:#9E4458; --on-accent:#fff; --tint:#F9EDEF; --how-bg:#FBE8EE; --band:#EAF4EE; --star-off:#E3CFCE; --box-line:#CDBBB9; --bar:rgba(251,247,244,.86); --glass:rgba(255,255,255,.92); --glass-soft:rgba(255,255,255,.55); --mf-bg:#F4E7E3; --mf-b2:#E7EDE5; --mf-them:#F4ECE9; --scrim:rgba(46,42,43,.55);
   --display:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --body:'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --gutter-l:max(16px, env(safe-area-inset-left, 0px));
@@ -65,7 +65,7 @@ html[data-theme-mode="auto"] .ti-auto,html[data-theme-mode="light"] .ti-light,ht
   --line:#3B3234; --chip-line:#4A3F42; --blush:#3A2A2F; --blush-2:#33292C;
   --accent:#B04A62; --accent-text:#E58B9D; --accent-ink:#F0A3B1; --err:#F08A9A; --star:#E26F88;
   --sage:#9DBFA6; --sage-ink:#B5D0BC; --sage-bg:#26302A; --night:#171213;
-  --tint:#3A2A2F; --how-bg:#33282B; --star-off:#4A3F42; --box-line:#6A5B5E; --bar:rgba(31,26,27,.86);
+  --tint:#3A2A2F; --how-bg:#33282B; --band:#272B29; --star-off:#4A3F42; --box-line:#6A5B5E; --bar:rgba(31,26,27,.86);
   --glass:rgba(42,35,37,.92); --glass-soft:rgba(42,35,37,.55);
   --mf-bg:#261F21; --mf-b2:#26302A; --mf-them:#3A2F32;
   color-scheme:dark;
@@ -1118,6 +1118,9 @@ a,button,input,select,textarea,label,[role="button"]{touch-action:manipulation}
 /* owner liked: "How we work" sits on a soft pink panel */
 .how{margin-top:80px;padding:clamp(48px,6vw,80px) clamp(20px,5vw,64px);background:var(--how-bg);border-radius:36px}
 @media (max-width:760px){.how{margin-inline:calc(var(--gutter-l) * -1) calc(var(--gutter-r) * -1);padding:48px var(--gutter-r) 48px var(--gutter-l);border-radius:28px;margin-top:56px}}
+/* owner liked (from redesign 5): catalog on a soft mint oval */
+.band{background:var(--band);border-radius:50%/64px;padding-block:104px}
+@media (max-width:560px){.band{border-radius:50%/32px;padding-block:64px}}
 </style>
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__revealReady)document.documentElement.classList.remove('js')},3000);</script>
 
