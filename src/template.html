@@ -65,11 +65,11 @@ html[data-theme-mode="auto"] .ti-auto,html[data-theme-mode="light"] .ti-light,ht
   --bg:#1F1A1B; --surface:#2A2325; --ink:#F3EAE4; --muted:#CFC3C0; --soft:#B3A6A8;
   --line:#3B3234; --chip-line:#4A3F42; --blush:#3E2A31; --blush-2:#33292C;
   --accent:#B8365E; --accent-text:#EE8EAA; --accent-ink:#F5A9BF; --err:#F08A9A; --star:#E26F88;
-  --sage:#86C9B0; --sage-ink:#A8DCC8; --sage-bg:#1D3A30; --night:#171013;
+  --sage:#9CC7B6; --sage-ink:#B8D8CB; --sage-bg:#2B3531; --night:#171013;
   --tint:#3A2A2F; --star-off:#4A3F42; --box-line:#6A5B5E; --bar:rgba(31,26,27,.86);
   --glass:rgba(42,35,37,.92); --glass-soft:rgba(42,35,37,.55);
-  --mf-bg:#261F21; --mf-b2:#1F3329; --mf-them:#3A2F32;
-  --band:#222B27; --call-bg:#3E2A31; --call-ink:#F3EAE4; --call-muted:#CFC3C0;
+  --mf-bg:#261F21; --mf-b2:#2B3631; --mf-them:#3A2F32;
+  --band:#272B29; --call-bg:#3E2A31; --call-ink:#F3EAE4; --call-muted:#CFC3C0;
   color-scheme:dark;
 }
 html.theme-anim,html.theme-anim *,html.theme-anim *::before,html.theme-anim *::after{transition:background-color .3s ease,color .3s ease,border-color .3s ease,fill .3s ease,box-shadow .3s ease!important}
@@ -1158,10 +1158,6 @@ a,button,input,select,textarea,label,[role="button"]{touch-action:manipulation}
 .nav-tab{min-height:44px}
 @media (min-width:1021px){.nav-tab:hover{background:var(--sage-bg)}}
 .logo-mark{border-radius:50% 50% 11px 11px/60% 60% 11px 11px}
-/* promises: round mint icons, serif titles */
-.promise .icon{border-radius:50%}
-.promise h3{font-family:var(--display);font-size:22px;font-weight:600;line-height:1.15}
-@media (max-width:560px){.promise h3{font-size:18px}.promise .icon{border-radius:50%}}
 /* about: the photo is an arch like in the hero, with a mint circle behind it */
 .about{overflow-x:clip}
 .about-media{position:relative;isolation:isolate;overflow:visible;background:none;border-radius:0}
@@ -1187,6 +1183,8 @@ a,button,input,select,textarea,label,[role="button"]{touch-action:manipulation}
 /* footer: sentence-case column titles in the serif, no letter-spaced caps */
 .foot-col h4{font-family:var(--display);font-size:24px;font-weight:600;letter-spacing:0;text-transform:none;line-height:1.1}
 .foot-tag{font-size:16px}
+/* dark theme: muted mint and WhatsApp green, nothing neon */
+:root[data-theme="dark"] .btn-wa{background:#3F6B58}
 </style>
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__revealReady)document.documentElement.classList.remove('js')},3000);</script>
 
