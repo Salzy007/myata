@@ -1843,18 +1843,35 @@ a,button,input,select,textarea,label,[role="button"]{touch-action:manipulation}
   var calmFocus = { preventScroll: true };
 
   var IMG = {
-    gypsophila: '__IMG_gypsophila__', roses: '__IMG_roses__', ranunculus: '__IMG_ranunculus__',
+    roses: '__IMG_roses__', gypsophila: '__IMG_gypsophila__', ranunculus: '__IMG_ranunculus__',
     lilac: '__IMG_lilac__', box: '__IMG_box__', redroses: '__IMG_redroses__',
-    b7_9b954070: '__IMG_b7_9b954070__'
+    b7_9b954070: '__IMG_b7_9b954070__', dawn: '__IMG_dawn__', whitecloud: '__IMG_whitecloud__',
+    crimson: '__IMG_crimson__', grandma: '__IMG_grandma__', freshmorning: '__IMG_freshmorning__',
+    ballqueen: '__IMG_ballqueen__', lavender: '__IMG_lavender__', sunnyday: '__IMG_sunnyday__',
+    firstlove: '__IMG_firstlove__', springwhisper: '__IMG_springwhisper__', velvetpeony: '__IMG_velvetpeony__',
+    giftbox: '__IMG_giftbox__', signature: '__IMG_signature__'
   };
   var bouquets = [
-    { name: 'Радужная гипсофила', price: 135, desc: 'Объёмный букет из окрашенной гипсофилы в лавандовой бумаге.', img: 'gypsophila', occ: ['birthday', 'just'], pal: ['bright'], alt: 'Букет разноцветной гипсофилы в лавандовой упаковке' },
     { name: 'Облако роз', price: 289, desc: '51 кустовая роза кораллово-розового оттенка. Пышно и без лишнего.', img: 'roses', occ: ['birthday', 'love', 'wedding'], pal: ['bright', 'pastel'], alt: 'Большой букет розовых кустовых роз' },
+    { name: 'Радужная гипсофила', price: 135, desc: 'Объёмный букет из окрашенной гипсофилы в лавандовой бумаге.', img: 'gypsophila', occ: ['birthday', 'just'], pal: ['bright'], alt: 'Букет разноцветной гипсофилы в лавандовой упаковке' },
     { name: 'Пудровый сад', price: 175, desc: 'Пионовидные розы, ранункулюсы, гвоздика и эвкалипт в пудровой упаковке.', img: 'ranunculus', occ: ['birthday', 'just', 'sorry', 'wedding'], pal: ['pastel'], alt: 'Пастельный букет с ранункулюсами и эвкалиптом' },
     { name: 'Лиловый туман', price: 189, desc: 'Лавандовые розы, белые тюльпаны, брунии и эвкалипт в дымчатой упаковке.', img: 'lilac', occ: ['just', 'birthday', 'sorry', 'wedding'], pal: ['pastel', 'white'], alt: 'Букет из лавандовых роз и белых тюльпанов в серой упаковке' },
     { name: 'Нежность в коробке', price: 215, desc: 'Гортензия, орхидеи, каллы и розы в шляпной коробке с ручкой.', img: 'box', occ: ['birthday', 'love', 'sorry'], pal: ['pastel', 'white'], alt: 'Композиция с гортензией, орхидеями и каллами в коробке' },
     { name: 'Бархатная классика', price: 159, desc: '15 тёмно-красных роз с бархатными лепестками. Классика для признаний.', img: 'redroses', occ: ['love', 'sorry'], pal: ['red'], alt: 'Букет тёмно-красных бархатных роз' },
-    { name: 'Нежность', price: 159, desc: 'Прекрасный букет из 51 тюльпана', img: 'b7_9b954070', occ: ['birthday', 'love'], pal: ['bright', 'pastel'], alt: '51 нежный тюльпан' }
+    { name: 'Нежность', price: 159, desc: 'Прекрасный букет из 51 тюльпана', img: 'b7_9b954070', occ: ['birthday', 'love'], pal: ['bright', 'pastel'], alt: '51 нежный тюльпан' },
+    { name: 'Нежный рассвет', price: 165, desc: 'Кустовые розы и эустома в персиковой гамме, обёртка крафт.', img: 'dawn', occ: ['birthday', 'just'], pal: ['pastel'], alt: 'Букет из кустовых роз и эустомы в персиковых тонах' },
+    { name: 'Белое облако', price: 195, desc: 'Белые розы и гипсофила, перевязаны атласной лентой.', img: 'whitecloud', occ: ['wedding', 'love'], pal: ['white'], alt: 'Белые розы с гипсофилой' },
+    { name: 'Багровый вечер', price: 245, desc: 'Красные розы с эвкалиптом в плотной упаковке.', img: 'crimson', occ: ['love'], pal: ['red'], alt: 'Красные розы с зеленью эвкалипта' },
+    { name: 'Сад бабушки', price: 125, desc: 'Полевые цветы и душистые травы, как из деревенского сада.', img: 'grandma', occ: ['just', 'sorry'], pal: ['bright', 'pastel'], alt: 'Букет полевых цветов и трав' },
+    { name: 'Утренняя свежесть', price: 145, desc: 'Ранункулюсы и мята в нежной бумаге, лёгкий аромат.', img: 'freshmorning', occ: ['just', 'birthday'], pal: ['pastel'], alt: 'Ранункулюсы с веточками мяты' },
+    { name: 'Королева бала', price: 320, desc: 'Крупные пионовидные розы в шляпной коробке.', img: 'ballqueen', occ: ['love', 'wedding'], pal: ['pastel', 'white'], alt: 'Пионовидные розы в круглой коробке' },
+    { name: 'Лавандовый сон', price: 155, desc: 'Сирень, лаванда и эустома в сиренево-белой гамме.', img: 'lavender', occ: ['just', 'sorry'], pal: ['pastel', 'white'], alt: 'Букет в сиреневых тонах' },
+    { name: 'Солнечный день', price: 135, desc: 'Яркая смесь жёлтых и оранжевых цветов для хорошего настроения.', img: 'sunnyday', occ: ['birthday', 'just'], pal: ['bright'], alt: 'Яркий жёлто-оранжевый букет' },
+    { name: 'Первая любовь', price: 205, desc: 'Розовые розы и ранункулюсы, перевязаны шёлковой лентой.', img: 'firstlove', occ: ['love'], pal: ['pastel'], alt: 'Розовые розы с ранункулюсами' },
+    { name: 'Шёпот весны', price: 175, desc: 'Тюльпаны, ранункулюсы и нарциссы в весенней гамме.', img: 'springwhisper', occ: ['birthday', 'just'], pal: ['pastel', 'bright'], alt: 'Весенний букет из тюльпанов и нарциссов' },
+    { name: 'Бархатный пион', price: 265, desc: 'Пионы и розы в глубоких винных оттенках, для особого случая.', img: 'velvetpeony', occ: ['love', 'birthday'], pal: ['red', 'bright'], alt: 'Пионы и розы в винных тонах' },
+    { name: 'Подарочная коробка', price: 185, desc: 'Цветы в коробке: розы, хризантемы и зелень, ничего не нужно докупать.', img: 'giftbox', occ: ['birthday', 'sorry'], pal: ['pastel', 'white'], alt: 'Цветы в подарочной коробке' },
+    { name: 'Мята и пион', price: 225, desc: 'Фирменный букет мастерской: пионы, мята и эвкалипт.', img: 'signature', occ: ['love', 'birthday', 'wedding'], pal: ['pastel', 'bright'], alt: 'Фирменный букет с пионами и мятой' }
   ];
   var faq = [
     { q: 'Как быстро вы доставите букет?', a: 'По Минску — в течение 2 часов после подтверждения заказа. Можно заказать доставку к точному времени на любой день вперёд.' },
