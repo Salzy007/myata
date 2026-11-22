@@ -1165,6 +1165,8 @@ html.intro-m-on body{overflow:hidden}
 .introm.go .im-word{opacity:0;transform:translateY(-26px);transition:opacity .5s ease .05s,transform .7s cubic-bezier(.5,0,.2,1)}
 .introm.go .im-sub,.introm.go .im-bar,.introm.go .im-skip{opacity:0!important;transition:opacity .35s ease}
 .introm.go .im-pet{opacity:0!important;transition:opacity .6s ease}
+/* в момент открытия окна арка заставки исчезает, иначе она остаётся видна сквозь прозрачные места сайта */
+html.intro-m-in .introm .im-arch{opacity:0;transition:opacity .25s ease}
 /* окно в сайт: сайт лежит поверх заставки и виден только внутри арки, потом арка растёт на весь экран */
 html.intro-m-on #view-main{position:relative;z-index:10001;opacity:.01;will-change:clip-path,opacity;clip-path:inset(var(--ay,38vh) var(--ar,30vw) calc(100% - var(--ab,62vh)) var(--ax,30vw) round calc(var(--aw,200px) / 2) calc(var(--aw,200px) / 2) 20px 20px)}
 html.intro-m-on.intro-m-in #view-main{opacity:1;will-change:clip-path;clip-path:inset(0 0 0 0 round 0 0 0 0);transition:clip-path 1.5s cubic-bezier(.7,0,.2,1)}
